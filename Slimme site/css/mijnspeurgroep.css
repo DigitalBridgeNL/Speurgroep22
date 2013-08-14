@@ -1,0 +1,16 @@
+#loadBedrijf table, #loadLogin table {
+	border: none;
+}
+
+#loadBedrijf table tr td, #loadLogin table tr td {
+	padding: 0 3px 0 0;
+}
+
+#loadBedrijf input[type="text"], #loadLogin input[type="text"] {
+	margin: 0 0 1px 0;
+}
+
+#loadBedrijf label {
+	margin-top: 5px;
+}
+

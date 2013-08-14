@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+
+.grey_titel {
+	border: #666 1px solid;
+	background-color: #D9D9D9;
+	width: 100%;
+	font-size: 14px;
+	font-weight: bold;	
+	padding: 10px;
+}
+
+#tekstarea {
+	height: 200px;	
+}
+
+.bgpakket {
+	background-image:url(../images/bg_pakketkeuze.png);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	padding: 10px;
+}
+
+.bgadvertentie {
+	background-image:url(../images/bg_advertentie.png);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	padding: 20px;
+}
+
+.no_list {
+	list-style-type: none;
+}
+
+.centerTxt {
+	text-align: center;
+}
+
+#tel_container {
+	color: blue;
+	cursor: pointer;
+}
+
+.smallTxt {
+	font-size: 12px;
+}
+
+.pakketVB1 p {
+	margin-bottom: 0px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.pakketVB1 a {
+	font-weight: bold;
+	color: blue;
+	text-decoration: none;
+}
+
+.blueTxt {
+	color: blue;
+}
+
+.bg_grey {
+	background: #D9D9D9;
+}

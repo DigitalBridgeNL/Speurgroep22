@@ -22,7 +22,7 @@ include('includes/header.php');
 	</div>
 	<div class="large-9 columns">
 		<div class="row">
-			<p class="grey_titel"> Slogan bedrijf.... </p>
+			<p class="grey_titel marginVB"> Slogan bedrijf.... </p>
 		</div>
 		<div class="row bgadvertentie">
 		 <div class="row">
@@ -33,7 +33,6 @@ include('includes/header.php');
 			?>
 			<h6 class="left"> Beschrijving </h6>
 			<?php }?>
-			<p class="right smallTxt"> 313 x gezien sinds 1 aug 13 </p>
 			<div class="clear"></div>
 			<?php
 			if ($_GET['page'] == 1)

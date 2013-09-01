@@ -4,7 +4,7 @@
 		include('DBinteraction.php');
 		$currentuser = $_GET['id'];
 		openDB();
-		$result = mysql_query("SELECT b.naam as branche FROM branche b, userBranche ub WHERE b.brancheID = ub.brancheID AND ub.userid ='$currentuser'");
+		$result = mysql_query("SELECT b.naam as branche FROM branche b, userbranche ub WHERE b.brancheID = ub.brancheID AND ub.userid ='$currentuser'");
 		$rows = array();
 		while($r = mysql_fetch_assoc($result)) 
 		{

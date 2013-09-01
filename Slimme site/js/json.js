@@ -133,3 +133,23 @@ function loadPakket(){
 			}
 		});
 };
+
+function add_specialisatie(){
+		var currentUser = document.getElementById('user').value;
+		var value = document.getElementById('value_specialisatie').value;
+		var branche = document.getElementById('branche').value;
+		$.ajax({
+		type: 'get',
+		url: 'includes/addSpecialisatie.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		data: {id: currentUser, specialisatie: value, branche: branche},
+		success: function(data) {
+			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
+			var bevestiging = "<p class='grey_titel'>Uw specialisatie <U>"+value+"</U> is toegevoegd";
+			for (i = 0; i < data.length; i += 1) {
+			strHTML += '<label for="checkbox1"><input type="checkbox" name="'+data[i]['bs_id']+'" id="special1" style="display: none;"><span class="custom checkbox"></span>'+data[i]['specialisatie']+'</label>';
+			}
+			$("#specialisaties_chkbox").html(strHTML); // string wordt in het element met ID contentPage geplaatst.
+			$("#specialisatie_add").append(bevestiging); 
+			}
+		});
+};	

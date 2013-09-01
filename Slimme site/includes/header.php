@@ -18,6 +18,7 @@
   <link href="../css/foundation.css" rel="stylesheet">
   <script type="text/javascript" src="../js/sha512.js"></script>
   <script type="text/javascript" src="../js/forms.js"></script>
+  <script type="text/javascript" src="../js/functions.js"></script>
   <!-- Included JS Files (Compressed) -->
   <script src="../js/foundation/jquery.js"></script>
   <script src="../js/vendor/custom.modernizr.js"></script>
@@ -25,7 +26,17 @@
 </head>
 
 <body>
-<?php include('includes/DBinteraction.php'); ?>
+<?php include('DBinteraction.php'); 
+$host = 'http://speurgroep.digitalbridge.nl/';
+$currentbranche = current_branche($_SESSION['myusername']);
+$branche = mysql_fetch_array($currentbranche);
+?>
+<form>
+<input type="hidden" name="user" value="<?php echo $_SESSION['myusername'] ?>" id="user" />
+</form>
+<form>
+<input type="hidden" name="branche" value="<?php echo $branche['brancheID'] ?>" id="branche" />
+</form>
 <div class="center">
 <div class="logo">
 <img src="../images/logo_2.png" width="200px" height="64px" />
@@ -33,10 +44,10 @@
 
 <nav class="mainNav">
 		<ul>
-        	<li><a href="index.php">Home</a></li>
-            <li><a href="mijnSpeurgroep.php">Mijn Speurgroep</a></li>
-        	<li><a href="inloggen.php">Inloggen</a></li>
-            <li><a href="contact.php">Contact</a></li>
-        	<li><a href="helpNinfo.php?page=1">Help en Info</a></li>
+        	<li><a href="<?php echo $host;?>index.php">Home</a></li>
+            <li><a href="<?php echo $host;?>mijnSpeurgroep.php">Mijn Speurgroep</a></li>
+        	<li><a href="<?php echo $host;?>inloggen.php">Inloggen</a></li>
+            <li><a href="<?php echo $host;?>contact.php">Contact</a></li>
+        	<li><a href="<?php echo $host;?>helpNinfo.php?page=1">Help en Info</a></li>
 		</ul>
 </nav>

@@ -14,6 +14,11 @@
 	height: 200px;	
 }
 
+.marginVB {
+	margin-left: 5px;
+	width: 680px;
+}
+
 .bgpakket {
 	background-image:url(../images/bg_pakketkeuze.png);
 	background-size: 100% 100%;
@@ -64,3 +69,8 @@
 .bg_grey {
 	background: #D9D9D9;
 }
+
+.labels label{
+	margin-bottom: 0.33em;
+}
+	

@@ -1,121 +1,211 @@
 <?php
 include('includes/header.php');
+$user = $_SESSION['myusername'];
+$userdetails = get_users_details($user);
+$row = mysql_fetch_array($userdetails);
+$contactpersoon = $row['contactpersoon'];
+$bedrijfsnaam = $row['bedrijfsnaam'];
+$adres = $row['adres'];
+$postcode = $row['postcode'];
+$plaats = $row['plaats'];
+$website = $row['website'];
+$email = $row['email'];
+$telefoonnummer1 = $row['telefoonnummer1'];
+$telefoonnummer2 = $row['telefoonnummer2'];
+$branche = $row['brancheID'];
 ?>
 <script>
     $( window ).load(function() {
+		var result = qs('pakket');
+		if (result != 1){
+			$('#option_pakket1_banner').hide();
+			$('#option_pakket1_tekst').hide();
+			$('#option_pakket1_specialisatie').hide();
+			$('#option_pakket1_extrainfo').hide();
+			$('#option_pakket1n2_telefoonnummer').hide();
+			$('#option_pakket1_fotos').hide();
+			$('#option_pakket1n2_profielfoto').hide();
+			if (result == 2){
+				$('#option_pakket1n2_telefoonnummer').show();
+				$('#option_pakket1n2_profielfoto').show();
+			}
+		}
     });
 </script>
 <!-- Start van Contact categorie !-->
 <div class="clear"></div>
-<h3> Stap 1 </h3>
-<p class="grey_titel"> Kies uw pakket </p>
-<form class="custom panel">
-	<div class="row">
-		<div class="large-3 columns">
-		  <label for="pakket1">
-			<input name="pakket1" type="radio" id="pakket1" style="display:none;">
-			<span class="custom radio"></span> Pakket 1
-		  </label>
-		  <label for="pakket2">
-			<input name="pakket1" type="radio" id="pakket2" style="display:none;">
-			<span class="custom radio"></span> Pakket 2
-		  </label>
-		  <label for="pakket3">
-			<input name="pakket1" type="radio" id="pakket3" style="display:none;">
-			<span class="custom radio"></span> Pakket 3
-		  </label>
-		  <label for="pakket4">
-			<input name="pakket1" type="radio" id="pakket4" style="display:none;">
-			<span class="custom radio"></span> Banner pakket
-		  </label>
-		</div>
-	</div>
-</form>
+<?php if($_GET['pakket'] == 1){?>
+<p class="grey_titel">U hebt gekozen voor pakket 1</p>
+<?php }?>
+<?php if($_GET['pakket'] == 2){?>
+<p class="grey_titel">U hebt gekozen voor pakket 2</p>
+<?php }?>
+<?php if($_GET['pakket'] == 3){?>
+<p class="grey_titel">U hebt gekozen voor het gratis pakket</p>
+<?php }?>
+<h3> Persoonlijke gegevens </h3>
+<form enctype="multipart/form-data" class="custom" name="bestelling" onSubmit="submitForm()" method="post" action="includes/updateUser.php">
 <p class="grey_titel"> Kies uw branche(s) </p>
-<form class="custom panel">
-<div class="row">
+<div class="row panel">
 	<div class="large-6 columns">
       <label for="customDropdown1">Kies uw hoofdgroep</label>
-      <select id="customDropdown1" class="medium">
-        <option>This is another option</option>
-        <option>This is another option too</option>
-        <option>Look, a third option</option>
+      <select id="customDropdown1" class="medium" name="hoofdgroep">
+<?php
+ 		//retrieve all types from the database.
+        $branches = branches();
+        //Create a dropdown option for every type.
+        while($row = mysql_fetch_array($branches))
+        {
+            echo "<option value='".$row['brancheID']."'>".$row['naam']."</option>";
+        }
+?>
       </select>
-	  <label for="customDropdown1">Kies uw subgroep</label>
-      <select id="customDropdown1" class="medium">
-        <option>This is another option</option>
-        <option>This is another option too</option>
-        <option>Look, a third option</option>
+      <div id="option_pakket1_banner">
+	  <label for="customDropdown2">Kies uw subgroep</label>
+      <select id="customDropdown2" class="medium" name="subgroep1">
+<?php
+ 		//retrieve all types from the database.
+        $branches = branches();
+        //Create a dropdown option for every type.
+        while($row = mysql_fetch_array($branches))
+        {
+            echo "<option value='".$row['brancheID']."'>".$row['naam']."</option>";
+        }
+?>
       </select>
-	  <label for="customDropdown1">Kies uw subgroep voor 1e extra plaatsing</label>
-      <select id="customDropdown1" class="medium">
-        <option>This is another option</option>
-        <option>This is another option too</option>
-        <option>Look, a third option</option>
+	  <label for="customDropdown3">Kies uw subgroep voor 1e extra plaatsing</label>
+      <select id="customDropdown3" class="medium" name="subgroep2">
+<?php
+ 		//retrieve all types from the database.
+        $branches = branches();
+        //Create a dropdown option for every type.
+        while($row = mysql_fetch_array($branches))
+        {
+            echo "<option value='".$row['brancheID']."'>".$row['naam']."</option>";
+        }
+?>
       </select>
-	  <label for="customDropdown1">Kies uw subgroep voor 2e extra plaatsing</label>
-      <select id="customDropdown1" class="medium">
-        <option>This is another option</option>
-        <option>This is another option too</option>
-        <option>Look, a third option</option>
+	  <label for="customDropdown4">Kies uw subgroep voor 2e extra plaatsing</label>
+      <select id="customDropdown4" class="medium" name="subgroep3">
+<?php
+ 		//retrieve all types from the database.
+        $branches = branches();
+        //Create a dropdown option for every type.
+        while($row = mysql_fetch_array($branches))
+        {
+            echo "<option value='".$row['brancheID']."'>".$row['naam']."</option>";
+        }
+?>
       </select>
-	  <label for="customDropdown1">Kies uw subgroep voor 3e extra plaatsing</label>
-      <select id="customDropdown1" class="medium">
-        <option>This is another option</option>
-        <option>This is another option too</option>
-        <option>Look, a third option</option>
+	  <label for="customDropdown5">Kies uw subgroep voor 3e extra plaatsing</label>
+      <select id="customDropdown5" class="medium" name="subgroep4">
+<?php
+ 		//retrieve all types from the database.
+        $branches = branches();
+        //Create a dropdown option for every type.
+        while($row = mysql_fetch_array($branches))
+        {
+            echo "<option value='".$row['brancheID']."'>".$row['naam']."</option>";
+        }
+?>
       </select>
+      </div>
 	</div>
 </div>
-</form>
+<div id="option_pakket1_tekst">
 <p class="grey_titel"> Tekst beschrijving </p>
-<form class="panel">
-	<div class="row">
+	<div class="row panel">
       <div class="large-6 columns">
         <label>Textarea Label</label>
-        <textarea id="tekstarea" placeholder="Schrijf hier een passende reclametekst voor uw bedrijf (maximaal 250 woorden)"></textarea>
+        <textarea id="tekstarea" placeholder="Schrijf hier een passende reclametekst voor uw bedrijf (maximaal 250 woorden)" name="tekstbeschrijving"></textarea>
       </div>
     </div>
-</form>
+</div>
+<div id="option_pakket1_specialisatie">
 <p class="grey_titel"> Gespecialiseerd in: </p>
-<form class="custom panel">
-	<div class="row">	
-		<div class="large-4 columns">
-		  <label for="checkbox1"><input type="checkbox" id="special1" style="display: none;"><span class="custom checkbox"></span> A(L) </label>
-		  <label for="checkbox2"><input type="checkbox" id="special2" style="display: none;"><span class="custom checkbox"></span> A(Z)</label>
-		  <label for="checkbox3"><input type="checkbox" id="special3" style="display: none;"><span class="custom checkbox"></span> AM2</label>
-		  <p> Extra`s </p>
-		  <label for="checkbox2"><input type="checkbox" id="special2" style="display: none;"><span class="custom checkbox"></span> Rijsimulator</label>
-		  <label for="checkbox3"><input type="checkbox" id="special3" style="display: none;"><span class="custom checkbox"></span> Theorieles</label>
+	<div class="row panel">	
+		<div class="large-4 columns" id="specialisaties_chkbox">
+        <?php 
+			$user = $_SESSION['myusername'];
+			$currentbranche = current_branche($user);
+				$branche = mysql_fetch_array($currentbranche);
+			$specialisaties = specialisaties($branche['brancheID']);
+			 while($row = mysql_fetch_array($specialisaties))
+        	{
+				echo '<label for="checkbox1"><input type="checkbox" name="specialisatie'.$row['bs_id'].'" id="special1"><span class="custom checkbox"></span>'.$row['specialisatie'].'</label>';
+			}
+		?>
 		</div>
+        <div class="large-8 columns">
+        	<div class="row">
+            <p> Voer hier nieuwe specialisaties in voor uw branche die nog niet in de lijst voorkomen. </p>
+            <input type="text"  class="left" id="value_specialisatie"/>
+            <a href="javascript:;" class="right" onclick="add_specialisatie()"> Toevoegen </a>
+            </div>
+            <div class="row" id="specialisatie_add">
+            </div>
+        </div>
 	</div>
-</form>
+</div>
 <p class="grey_titel"> Uw bedrijfsgegevens </p>
-<form class="panel">
-	<div class='row'>
+	<div class='row panel'>
 		<div class='large-9 columns'>
-			<label>Contactpersoon</label><input type='text' name='contactpersoon' />
-			<label>Bedrijfsnaam</label><input type='text' name='bedrijfsnaam' />
-			<label>Woon / Vestigingsadres</label><input type='text' name='adres' />
-			<label>Postcode</label><input type='text' name='postcode' />
-			<label>Plaats</label><input type='text' name='plaats' />
-			<label>Website</label><input type='text' name='website' />
-			<label>E-Mailadres</label><input type='text' name='email' />
-			<label>Telefoonnummer 1</label><input type='text' name='telefoonnummer1' />
-			<label>Telefoonnummer 2</label><input type='text' name='telefoonnummer2' />
+			<label>Contactpersoon</label><input type='text' name='contactpersoon' value='<?php echo $contactpersoon ?>'/>
+			<label>Bedrijfsnaam</label><input type='text' name='bedrijfsnaam' value='<?php echo $bedrijfsnaam ?>'/>
+			<label>Woon / Vestigingsadres</label><input type='text' name='adres' value='<?php echo $adres ?>'/>
+			<label>Postcode</label><input type='text' name='postcode' value='<?php echo $postcode ?>'/>
+			<label>Plaats</label><input type='text' name='plaats' value='<?php echo $plaats ?>'/>
+			<label>Website</label><input type='text' name='website' value='<?php echo $website ?>'/>
+			<label>E-Mailadres</label><input type='text' name='email' value='<?php echo $email ?>'/>
+            <div id="option_pakket1n2_telefoonnummer">
+			<label>Telefoonnummer</label><input type='text' name='telefoonnummer1' value='<?php echo $telefoonnummer1 ?>'/>
+			<label>Mobiel telefoonnummer</label><input type='text' name='telefoonnummer2' value='<?php echo $telefoonnummer2 ?>'/>
+            </div>
 		</div>
 	</div>
-</form>
+<div id="option_pakket1_extrainfo">
 <p class="grey_titel"> Extra informatie</p>
-<form class="panel">
-	<div class='row'>
+	<div class='row panel'>
 		<div class='large-9 columns'>
-			<label>Beschrijf in een zin uw bedrijf</label><input type='text' name='contactpersoon' />
-			<label>Bedrijfsvorm </label><input type='text' name='bedrijfsnaam' />
-			<label>Hoeveel jaren ervaring heeft u?</label><input type='text' name='adres' />
-			<label>Aantal medewerkers</label><input type='text' name='postcode' />
-			<label>K.v.K nummer</label><input type='text' name='plaats' />
+			<label>Beschrijf in een zin uw bedrijf</label><input type='text' name='1zinbedrijf' />
+			<label>Bedrijfsvorm </label><input type='text' name='bedrijfsvorm' />
+			<label>Hoeveel jaren ervaring heeft u?</label><input type='number'  name='jarenervaring' />
+			<label>Aantal medewerkers</label><input type='number' name='aantalmdw' />
+			<label>K.v.K nummer</label><input type='text' name='kvk' />
 		</div>
 	</div>
+</div>
+<div id="option_pakket1n2_profielfoto">
+	<p class="grey_titel"> Voeg uw profiel foto / logo toe</p>
+    	<div class='row panel'>
+			<div class='large-9 columns'>
+            <input type="file" name="profielfoto" />
+            </div>
+     	</div>
+</div>
+<div id="option_pakket1_fotos">
+	<p class="grey_titel"> Voeg uw profiel foto / logo toe</p>
+    	<div class='row panel'>
+			<div class='large-9 columns'>
+            <label> Foto 1 </label>
+            <input type="file" name="foto1" />
+            <label> Foto 2 </label>
+            <input type="file" name="foto2" />
+            <label> Foto 3 </label>
+            <input type="file" name="foto3" />
+            <label> Foto 4 </label>
+            <input type="file" name="foto4" />
+            <label> Foto 5 </label>
+            <input type="file" name="foto5" />
+            <label> Foto 6 </label>
+            <input type="file" name="foto6" />
+            <label> Foto 7 </label>
+            <input type="file" name="foto7" />
+            <label> Foto 8 </label>
+            <input type="file" name="foto8" />
+            </div>
+     	</div>
+</div>
+<input type="submit" value="Verder" name="update"/>
 </form>
 <?php include('includes/footer.php');?>

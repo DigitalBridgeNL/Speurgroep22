@@ -4,7 +4,22 @@ body {
 	color: black;
 }
 
+@media only screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-min-device-pixel-ratio: 1)
+{
+.center  {
+	height: 1464px;
+}
+}
+
+@media screen and (max-width:480px) {
+/* Making the headings red for smartphone users */
 .center {
+	height: 1464px;
+}
+}
+
+.center {
+	margin-top: 15px;
 	margin-left: auto;
 	margin-right: auto;
 	width: 926px;

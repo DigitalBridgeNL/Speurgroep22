@@ -1,15 +1,14 @@
 <?php
-  session_start();
   
 //----------------------------------------------------------------------Algemene functies
   function openDB()
   {
-      $DB = mysql_connect("db2.hosting2go.nl", "m1_4ebf03ad", "4Lw3zYTx9S");
+      $DB = mysql_connect("localhost", "root", "");
       if (!$DB)
       {
         die('Could not connect to the database server: ' . mysql_error());
       }
-      mysql_select_db("m1_4ebf03ad", $DB) or die('Could not connect to the database. Database may not exist.' . mysql_error());
+      mysql_select_db("speurgroep", $DB) or die('Could not connect to the database. Database may not exist.' . mysql_error());
   }
   
   function branches()

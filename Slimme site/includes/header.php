@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" ng-app > <!--<![endif]-->
 
 <head>
 	<meta charset="utf-8" />
@@ -19,6 +19,8 @@
   <script type="text/javascript" src="../js/sha512.js"></script>
   <script type="text/javascript" src="../js/forms.js"></script>
   <script type="text/javascript" src="../js/functions.js"></script>
+  <script type="text/javascript" src="../js/angular.min.js"></script>
+  <script type="text/javascript" src="../controllers/customer.js"></script>
   <!-- Included JS Files (Compressed) -->
   <script src="../js/foundation/jquery.js"></script>
   <script src="../js/vendor/custom.modernizr.js"></script>
@@ -28,8 +30,10 @@
 <body>
 <?php include('DBinteraction.php'); 
 $host = 'http://speurgroep.digitalbridge.nl/';
+if (!empty($_SESSION['myusername'])){
 $currentbranche = current_branche($_SESSION['myusername']);
 $branche = mysql_fetch_array($currentbranche);
+}
 ?>
 <form>
 <input type="hidden" name="user" value="<?php echo $_SESSION['myusername'] ?>" id="user" />

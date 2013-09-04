@@ -1,5 +1,6 @@
 <?php
 include('includes/header.php');
+if (!empty($_SESSION['myusername'])){
 $user = $_SESSION['myusername'];
 $userdetails = get_users_details($user);
 $row = mysql_fetch_array($userdetails);
@@ -13,6 +14,7 @@ $email = $row['email'];
 $telefoonnummer1 = $row['telefoonnummer1'];
 $telefoonnummer2 = $row['telefoonnummer2'];
 $branche = $row['brancheID'];
+}
 ?>
 <script>
     $( window ).load(function() {

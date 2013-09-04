@@ -47,36 +47,12 @@ $branche = $row['brancheID'];
 <?php }?>
 <h3> Persoonlijke gegevens </h3>
 <form enctype="multipart/form-data" class="custom" name="bestelling" onSubmit="submitForm()" method="post" action="includes/updateUser.php">
+<div id="option_pakket1_banner">
 <p class="grey_titel"> Kies uw branche(s) </p>
 <div class="row panel">
 	<div class="large-6 columns">
-      <label for="customDropdown1">Kies uw hoofdgroep</label>
-      <select id="customDropdown1" class="medium" name="hoofdgroep">
-<?php
- 		//retrieve all types from the database.
-        $branches = branches();
-        //Create a dropdown option for every type.
-        while($row = mysql_fetch_array($branches))
-        {
-            echo "<option value='".$row['brancheID']."'>".$row['naam']."</option>";
-        }
-?>
-      </select>
-      <div id="option_pakket1_banner">
-	  <label for="customDropdown2">Kies uw subgroep</label>
-      <select id="customDropdown2" class="medium" name="subgroep1">
-<?php
- 		//retrieve all types from the database.
-        $branches = branches();
-        //Create a dropdown option for every type.
-        while($row = mysql_fetch_array($branches))
-        {
-            echo "<option value='".$row['brancheID']."'>".$row['naam']."</option>";
-        }
-?>
-      </select>
 	  <label for="customDropdown3">Kies uw subgroep voor 1e extra plaatsing</label>
-      <select id="customDropdown3" class="medium" name="subgroep2">
+      <select id="customDropdown3" class="medium" name="subgroep1">
 <?php
  		//retrieve all types from the database.
         $branches = branches();
@@ -88,7 +64,7 @@ $branche = $row['brancheID'];
 ?>
       </select>
 	  <label for="customDropdown4">Kies uw subgroep voor 2e extra plaatsing</label>
-      <select id="customDropdown4" class="medium" name="subgroep3">
+      <select id="customDropdown4" class="medium" name="subgroep2">
 <?php
  		//retrieve all types from the database.
         $branches = branches();
@@ -100,7 +76,7 @@ $branche = $row['brancheID'];
 ?>
       </select>
 	  <label for="customDropdown5">Kies uw subgroep voor 3e extra plaatsing</label>
-      <select id="customDropdown5" class="medium" name="subgroep4">
+      <select id="customDropdown5" class="medium" name="subgroep3">
 <?php
  		//retrieve all types from the database.
         $branches = branches();
@@ -208,6 +184,11 @@ $branche = $row['brancheID'];
             </div>
      	</div>
 </div>
-<input type="submit" value="Verder" name="update"/>
+<div class="row">
+<div class="large-12 columns panel callout">
+<p> Heeft u alle gegevens ingevuld klik dan op de knop verder om door te gaan met uw bestelling. </p>
+</div>
+<input type="submit" class="button right" value="Verder" name="update" />
+</div>
 </form>
 <?php include('includes/footer.php');?>

@@ -9,7 +9,7 @@ include('includes/header.php');
 	{
 		if (document.getElementById("user").value == '')
 		{
-			$(document).ready(function() { $('#login').foundation('reveal', 'open'); });	
+			$(document).ready(function() { $('#login_pakket').foundation('reveal', 'open'); });	
 		}
 		else 
 		{
@@ -17,67 +17,6 @@ include('includes/header.php');
 		}
 	}
 </script>
-<div id="login" class="reveal-modal medium">
-<p class="grey_titel"> Inloggen </p>
-<div class="large-6 columns">
-	<form data-abide action="includes/verifyUser2.php" method="post">
-		<label>Email adres:</label>
-		<input type="email" name="email" required>
-		<small class="error">Vul een e-mail adres in</small>
-		<label>Wachtwoord: </label>
-		<input type="password" name="wachtwoord" required>
-		<small class="error">Wachtwoord is vereist</small>
-		<input type=image alt="submit" class="right" src="images/inloggen.png" width="125px" height="50px"/>
-	</form>
-</div>
-<div class="large-6 columns">
-	<div class="panel">
-		<p>Tekst waarom er ingelogd moet worden en dat er een mailtje is gestuurd met inlog gegevens. Indien deze niet is ontvangen kunnen zij contact opnemen met het email adres info@speurgroep.nl of direct een link maken waarbij ze hun account kunnen opvragen.</p>
-	</div>
-</div>
-<a class="close-reveal-modal">&#215;</a>
-</div>
-<div id="wachtwoordVergeten" class="reveal-modal small">
-  <?php
-	// wanneer er op verzenden is geklikt controleer of het e-mail adres bestaat.
-	if ( isset( $_POST['wwsubmit'] ) ) {
-	$myusername=$_POST['email'];
-	// To protect MySQL injection (more detail about MySQL injection )
-	$myusername = stripslashes($myusername);
-	$myusername = mysql_real_escape_string($myusername);
-	openDB();
-	$sql="SELECT * FROM user WHERE username='$myusername'";
-	$result=mysql_query($sql) or die('Error : '.mysql_error());
-	// Mysql_num_row is counting table row
-	$count=mysql_num_rows($result);
-	if($count==1){
-		echo "Er is een e-mail met een activatie code verstuurd naar ".$_POST['email'].".";
-		$activatiecode = generateActivatiecode(8);
-		$sql="UPDATE user SET activatiecode ='$activatiecode' WHERE username='$myusername'";
-		mysql_query($sql) or die('Error : '.mysql_error());
-		//functie staat in DBinteraction
-		sendActivationMail($myusername, $activatiecode);
-	}
-	else {
-	echo 'Het ingevoerde email adres is niet bij ons bekend. Probeert u het opnieuw.';
-	}
-	// open reveal modal zodat de gebruiker bericht kan krijgen over het ingevoerde email adres
-	echo "<script type='text/javascript'> $(document).ready(function() { $('#wachtwoordVergeten').foundation('reveal', 'open'); }); </script>";
-	}
-	
-	// als het count niet 1 is, laat het formulier zien.
-	if($count==!1){ ?>
-    <p class="grey_titel">Wachtwoord vergeten?</p>
-	<form data-abide action="" method="post" class="panel">
-		<label>E-mail adres: <small>required</small></label>
-		<input type="email" name="email" required>
-		<small class="error">Vul een e-mail adres in</small>
-		<input type="submit" class="small button" name="wwsubmit" />
-	</form>
-	<?php }?>
-	<p><a href="#" data-reveal-id="activatieCode">Activatie code invoeren?</a></p>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
 <div class="clear"></div>
 	<h3 class="centerTxt"> Pakketten </h3>
 	<div class="row">
@@ -171,4 +110,6 @@ include('includes/header.php');
 		</div>
 		</form>
 	</div>	
-<?php include('includes/footer.php');?>
+<?php 
+include('includes/modals.php');
+include('includes/footer.php');?>

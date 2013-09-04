@@ -19,6 +19,7 @@ $previous_url = $_SERVER['HTTP_REFERER']; // plaats de voorgaande URL in de vari
 			$email = $_POST['email'];
 			$telefoonnummer1 = $_POST['telefoonnummer1'];
 			$telefoonnummer2 = $_POST['telefoonnummer2'];
+			$tekstbeschrijving = $_POST['tekstbeschrijving'];
 			$zinbedrijf = $_POST['1zinbedrijf'];
 			$bedrijfsvorm = $_POST['bedrijfsvorm'];
 			$jarenervaring = $_POST['jarenervaring'];
@@ -34,11 +35,39 @@ $previous_url = $_SERVER['HTTP_REFERER']; // plaats de voorgaande URL in de vari
 			$foto7 = generateRandomcode(8).($_FILES['foto7']['name']);
 			$foto8 = generateRandomcode(8).($_FILES['foto8']['name']);
 			
+			// Maak een tijdelijk tekst bestand aan waar de POST data in opgeslagen wordt.
+			$filename = '../files/'.generateRandomcode(8).'bestelling.txt';// Het pad waar het bestand wordt opgeslagen.
+			$_SESSION['tempFile'] = $filename; // sla de locatie van het bestand op in een sessie voor later gebruik
+			$tempFile = fopen($filename, 'w') or die("can't open file");
+			fclose($tempFile);	// sluit het bestand
+			$content = serialize(array('user' => $user, 'contactpersoon' => $contactpersoon, 'bedrijfsnaam' => $bedrijfsnaam, 'adres' => $adres, 'postcode' => $postcode, 'plaats' => $plaats, 'website' => $website, 'email' => $email, 'telefoonnummer' => $telefoonnummer1, 'telefoonnummer2' => $telefoonnummer2, 'zinbedrijf' => $zinbedrijf, 'bedrijfsvorm' => $bedrijfsvorm, 'jarenervaring' => $jarenervaring, 'aantalmdw' => $aantalmdw, 'kvk' => $kvk, 'profielfoto' => $profielfoto, 'foto1' => $foto1, 'foto2' => $foto2, 'foto3' => $foto3, 'foto4' => $foto4, 'foto5' => $foto5, 'foto6' => $foto6, 'foto7' => $foto7, 'foto8' => $foto8));
+			if (is_writable($filename)) {
+			if (!$handle = fopen($filename, 'w')) {
+				 echo "Gegevens konden niet worden opgeslagen";
+				 exit;
+			}
+		 
+			if (fwrite($handle, $content) === FALSE) {
+				echo "Kan het bestand niet bewerken ($filename)";
+				exit;
+			}
+		 
+			//echo "Success, bestand ($filename) is opgeslagen";
+		 
+			fclose($handle);
+			} 
+			else 
+			{
+			echo "Het bestand is niet aan te passen";
+			}
+			
 			// Gegevens weergeven die ongeacht welk pakket altijd worden weergeven
 			echo '
-			<div class="row">
-				<div class="large-12 columns panel">
-					<table>
+			<div class="row panel">
+				<div class="large-6 columns">
+				<label> <h4>Basis gegevens</h4> </label>
+				<hr/>
+					<table class="width100">
 						<tr>
 							<td>Contact persoon</td><td>'.$contactpersoon.'</td>
 						</tr>
@@ -68,8 +97,6 @@ $previous_url = $_SERVER['HTTP_REFERER']; // plaats de voorgaande URL in de vari
 			echo '	</table>
 				</div>
 			</div>';
-			$pakket = 3;
-			updatePakket3($pakket, $user,$contactpersoon,$bedrijfsnaam,$adres,$postcode,$plaats,$website,$email);
 		}// close if statement check previous URL = pakket 3
 		
 	if($previous_url == 'http://localhost/adverteren.php?pakket=2') // als pakket keuze 2 (10 euro)
@@ -90,23 +117,9 @@ $previous_url = $_SERVER['HTTP_REFERER']; // plaats de voorgaande URL in de vari
 						<tr>
 							<td>Mobiel</td><td>'.$telefoonnummer2.'</td>
 						</tr>
-					</table></div>';
-					if ($uploadfotosucces == 1){
-					echo'
-					<div class="large-4 columns panel">
-					<p> Uw profiel foto </p>
-					<img src="'.$target.'" width="100px" height="50" />
-					</div>
-					';}
-					else
-					{ 
-						echo 'uw foto is niet geupload probeer het opnieuw';
-					};
-					echo'	
+					</table></div>
 			</div>
 			';
-			$pakket = 2;
-			updatePakket2($pakket, $user,$contactpersoon,$bedrijfsnaam,$adres,$postcode,$plaats,$website,$email, $telefoonnummer1, $telefoonnummer2, $profielfoto);
 	}// close if statement check previous URL = pakket 2
 	
 	if($previous_url == 'http://localhost/adverteren.php?pakket=1') // als pakket keuze 1 (30 euro)
@@ -175,94 +188,46 @@ $previous_url = $_SERVER['HTTP_REFERER']; // plaats de voorgaande URL in de vari
 						<tr>
 							<td>Telefoonnummer</td><td>'.$telefoonnummer2.'</td>
 						</tr>
-					</table></div>';
-					if ($uploadfotosucces = 'p'){
-					echo'
-					<div class="large-4 columns panel">
-					<p> Uw profiel foto </p>
-					<img src="'.$targetp.'" width="100px" height="50" />
-					</div>
-					';}
-					else
-					{ 
-						echo 'uw foto is niet geupload probeer het opnieuw';
-					};
-					echo'	
+					</table>
+				</div>
+				<div class="large-6 columns">
+				<label> <h4>Extra informatie</h4> </label>
+				<hr/>
+					<table class="width100">
+						<tr>
+							<td>In 1 zin uw bedrijf</td><td>'.$zinbedrijf.'</td>
+						</tr>
+						<tr>
+							<td>Bedrijfsvorm</td><td>'.$bedrijfsvorm.'</td>
+						</tr>
+						<tr>
+							<td>Aantal jaren ervaring</td><td>'.$jarenervaring.'</td>
+						</tr>
+						<tr>
+							<td>Aantal medewerkers</td><td>'.$aantalmdw.'</td>
+						</tr>
+						<tr>
+							<td>Kvk</td><td>'.$kvk.'</td>
+						</tr>
+				</table>
+				</div>	
 			</div>
+			<div class="row panel">
+			<label> <h4>Tekstbeschrijving</h4> </label>
+			<hr/>
+				<p>'.$tekstbeschrijving.'</p>
+			</div>	
 			';
-			echo '
-			<div class="row">
-			<div class="large-4 columns">
-				<a class="th radius">
-				<img src="'.$target1.'" width="100px" height="50"/>
-				</a>
-			</div>
-			<div class="large-4 columns">
-				<a class="th radius">
-				<img src="'.$target2.'" width="100px" height="50"/>
-				</a>
-			</div>
-			<div class="large-4 columns">
-				<a class="th radius">
-				<img src="'.$target3.'" width="100px" height="50" />
-				</a>
-			</div>
-			<div class="large-4 columns">
-				<a class="th radius">
-				<img src="'.$target4.'" width="100px" height="50"/>
-				</a>
-			</div>
-		 </div>
-		 <br />
-		  <div class="row">
-			<div class="large-4 columns">
-				<a class="th radius">
-				<img src="'.$target5.'" width="100px" height="50"/>
-				</a>
-			</div>
-			<div class="large-4 columns">
-				<a class="th radius">
-				<img src="'.$target6.'" width="100px" height="50"/>
-				</a>
-			</div>
-			<div class="large-4 columns">
-				<a class="th radius">
-				<img src="'.$target7.'" width="100px" height="50"/>
-				</a>
-			</div>
-			<div class="large-4 columns">
-				<a class="th radius">
-				<img src="'.$target8.'" width="100px" height="50"/>
-				</a>
-			</div>
-		 </div>
-		 ';
-		 updatePakket1($user,$contactpersoon,$bedrijfsnaam,$adres,$postcode,$plaats,$website,$email, $telefoonnummer1, $telefoonnummer2, $profielfoto, $foto1, $foto2, $foto3, $foto4, $foto5, $foto6, $foto7, $foto8);
-		 $filename = 'test.txt';
-$content = serialize(array('title' => $user, 'description' => $contactpersoon, 'content' => $foto2));
- 
-	if (is_writable($filename)) {
-    if (!$handle = fopen($filename, 'w')) {
-         echo "Cannot open file ($filename)";
-         exit;
-    }
- 
-    if (fwrite($handle, $content) === FALSE) {
-        echo "Cannot write to file ($filename)";
-        exit;
-    }
- 
-    echo "Success, wrote to file ($filename)";
- 
-    fclose($handle);
-	} 
-	else 
-	{
-    echo "The file $filename is not writable";
-	}
 	}
 	
 	}//close if statement that checks if form has been submitted
 
 ?>
-<a href="../test.php">verder</a>
+<div class="row">
+<div class="large-12 columns panel callout">
+<p> Indien uw gegevens niet correct zijn, klik dan op de terug knop hieronder. Ga anders verder met bestellen door op de knop volgende te klikken </p>
+</div>
+
+<a class="button left" href="../test.php">Terug</a>
+<a class="button right" href="../betaling.php">Verder</a>
+</div>

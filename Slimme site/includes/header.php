@@ -27,7 +27,7 @@
   <script src="../js/json.js"></script>
 </head>
 
-<body>
+<body ng-app='components'>
 <?php include('DBinteraction.php'); 
 $host = 'http://localhost/';
 if (!empty($_SESSION['myusername'])){

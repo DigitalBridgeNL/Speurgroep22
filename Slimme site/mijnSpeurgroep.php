@@ -16,6 +16,8 @@ else {
 		loadPakket();
     });
 </script>
+
+
 <div class="section-container tabs" data-section="tabs">
   <section>
     <p class="title" data-section-title><a href="#section1">Algemeen</a></p>

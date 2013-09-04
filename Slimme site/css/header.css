@@ -40,6 +40,9 @@ body {
 	list-style-type:none;
 	margin-bottom: 25px;
 }
+.width100 {
+	width:100%;	
+}
 
 .mainNav a
 {

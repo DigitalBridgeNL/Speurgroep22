@@ -198,3 +198,24 @@ if ( isset( $_POST['acsubmit'] ) ) {
 </form>
 <a class="close-reveal-modal">&#215;</a>
 </div>
+
+<div id="login_pakketten" class="reveal-modal medium">
+<p class="grey_titel"> Inloggen </p>
+<div class="large-6 columns">
+	<form data-abide action="includes/verifyUser2.php" method="post">
+		<label>Email adres:</label>
+		<input type="email" name="email" required>
+		<small class="error">Vul een e-mail adres in</small>
+		<label>Wachtwoord: </label>
+		<input type="password" name="wachtwoord" required>
+		<small class="error">Wachtwoord is vereist</small>
+		<input type=image alt="submit" class="right" src="images/inloggen.png" width="125px" height="50px"/>
+	</form>
+</div>
+<div class="large-6 columns">
+	<div class="panel">
+		<p>Tekst waarom er ingelogd moet worden en dat er een mailtje is gestuurd met inlog gegevens. Indien deze niet is ontvangen kunnen zij contact opnemen met het email adres info@speurgroep.nl of direct een link maken waarbij ze hun account kunnen opvragen.</p>
+	</div>
+</div>
+<a class="close-reveal-modal">&#215;</a>
+</div>

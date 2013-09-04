@@ -1,6 +1,7 @@
 <?php
-$filename = 'test.txt'
+session_start();
+$filename = $_SESSION['tempFile'];
 $arr = unserialize(file_get_contents($filename));
-echo $arr['title'];
+echo $arr['description'];
 
 ?>

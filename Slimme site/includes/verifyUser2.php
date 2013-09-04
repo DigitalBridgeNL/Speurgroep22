@@ -1,9 +1,9 @@
 <?php
 ob_start();
-$host="db2.hosting2go.nl"; // Host name
-$username="m1_4ebf03ad"; // Mysql username
-$password="4Lw3zYTx9S"; // Mysql password
-$db_name="m1_4ebf03ad"; // Database name
+$host="localhost"; // Host name
+$username="root"; // Mysql username
+$password=""; // Mysql password
+$db_name="speurgroep"; // Database name
 $tbl_name="user"; // Table name
 
 // Connect to server and select databse.

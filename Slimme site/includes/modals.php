@@ -121,7 +121,7 @@ return false;
 	$count=mysql_num_rows($result);
 	if($count==1){
 		echo "Er is een e-mail met een activatie code verstuurd naar ".$_POST['email'].".";
-		$activatiecode = generateActivatiecode(8);
+		$activatiecode = generateRandomcode(8);
 		$sql="UPDATE user SET activatiecode ='$activatiecode' WHERE username='$myusername'";
 		mysql_query($sql) or die('Error : '.mysql_error());
 		//functie staat in DBinteraction

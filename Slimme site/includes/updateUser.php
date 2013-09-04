@@ -24,15 +24,15 @@ $previous_url = $_SERVER['HTTP_REFERER']; // plaats de voorgaande URL in de vari
 			$jarenervaring = $_POST['jarenervaring'];
 			$aantalmdw = $_POST['aantalmdw'];
 			$kvk = $_POST['kvk'];
-			$profielfoto = ($_FILES['profielfoto']['name']);
-			$foto1 = ($_FILES['foto1']['name']);
-			$foto2 = ($_FILES['foto2']['name']);
-			$foto3 = ($_FILES['foto3']['name']);
-			$foto4 = ($_FILES['foto4']['name']);
-			$foto5 = ($_FILES['foto5']['name']);
-			$foto6 = ($_FILES['foto6']['name']);
-			$foto7 = ($_FILES['foto7']['name']);
-			$foto8 = ($_FILES['foto8']['name']);
+			$profielfoto = generateRandomcode(8).($_FILES['profielfoto']['name']);
+			$foto1 = generateRandomcode(8).($_FILES['foto1']['name']);
+			$foto2 = generateRandomcode(8).($_FILES['foto2']['name']);
+			$foto3 = generateRandomcode(8).($_FILES['foto3']['name']);
+			$foto4 = generateRandomcode(8).($_FILES['foto4']['name']);
+			$foto5 = generateRandomcode(8).($_FILES['foto5']['name']);
+			$foto6 = generateRandomcode(8).($_FILES['foto6']['name']);
+			$foto7 = generateRandomcode(8).($_FILES['foto7']['name']);
+			$foto8 = generateRandomcode(8).($_FILES['foto8']['name']);
 			
 			// Gegevens weergeven die ongeacht welk pakket altijd worden weergeven
 			echo '
@@ -62,7 +62,7 @@ $previous_url = $_SERVER['HTTP_REFERER']; // plaats de voorgaande URL in de vari
 						</tr>
 			';
 			
-		if($previous_url == 'http://speurgroep.digitalbridge.nl/adverteren.php?pakket=3') // als pakket keuze 3 (gratis)
+		if($previous_url == 'http://localhost/adverteren.php?pakket=3') // als pakket keuze 3 (gratis)
 		{
 			//Close tags van de standaard gegevens table en div row en column
 			echo '	</table>
@@ -72,11 +72,11 @@ $previous_url = $_SERVER['HTTP_REFERER']; // plaats de voorgaande URL in de vari
 			updatePakket3($pakket, $user,$contactpersoon,$bedrijfsnaam,$adres,$postcode,$plaats,$website,$email);
 		}// close if statement check previous URL = pakket 3
 		
-	if($previous_url == 'http://speurgroep.digitalbridge.nl/adverteren.php?pakket=2') // als pakket keuze 2 (10 euro)
+	if($previous_url == 'http://localhost/adverteren.php?pakket=2') // als pakket keuze 2 (10 euro)
 	{
 	//Directory waar de foto`s worden opgeslagen
 	$target = "../images/"; 
-	$target = $target . basename( $_FILES['profielfoto']['name']);
+	$target = $target . $profielfoto;
 	
 	//Writes the photo to the server 
 	if(move_uploaded_file($_FILES['profielfoto']['tmp_name'], $target)) 
@@ -109,19 +109,19 @@ $previous_url = $_SERVER['HTTP_REFERER']; // plaats de voorgaande URL in de vari
 			updatePakket2($pakket, $user,$contactpersoon,$bedrijfsnaam,$adres,$postcode,$plaats,$website,$email, $telefoonnummer1, $telefoonnummer2, $profielfoto);
 	}// close if statement check previous URL = pakket 2
 	
-	if($previous_url == 'http://speurgroep.digitalbridge.nl/adverteren.php?pakket=1') // als pakket keuze 1 (30 euro)
+	if($previous_url == 'http://localhost/adverteren.php?pakket=1') // als pakket keuze 1 (30 euro)
 	{
 	//Directory waar de foto`s worden opgeslagen
 	$target = "../images/"; 
-	$targetp = $target . basename( $_FILES['profielfoto']['name']);
-	$target1 = $target . basename( $_FILES['foto1']['name']);
-	$target2 = $target . basename( $_FILES['foto2']['name']);
-	$target3 = $target . basename( $_FILES['foto3']['name']);
-	$target4 = $target . basename( $_FILES['foto4']['name']);
-	$target5 = $target . basename( $_FILES['foto5']['name']);
-	$target6 = $target . basename( $_FILES['foto6']['name']);
-	$target7 = $target . basename( $_FILES['foto7']['name']);
-	$target8 = $target . basename( $_FILES['foto8']['name']);
+	$targetp = $target . $profielfoto;
+	$target1 = $target . $foto1;
+	$target2 = $target . $foto2;
+	$target3 = $target . $foto3;
+	$target4 = $target . $foto4;
+	$target5 = $target . $foto5;
+	$target6 = $target . $foto6;
+	$target7 = $target . $foto7;
+	$target8 = $target . $foto8;
 
 	//Writes the photo to the server 
 	if(move_uploaded_file($_FILES['profielfoto']['tmp_name'], $targetp)) 
@@ -237,10 +237,32 @@ $previous_url = $_SERVER['HTTP_REFERER']; // plaats de voorgaande URL in de vari
 			</div>
 		 </div>
 		 ';
-		 $pakket = 1;
-		 updatePakket1($pakket, $user,$contactpersoon,$bedrijfsnaam,$adres,$postcode,$plaats,$website,$email, $telefoonnummer1, $telefoonnummer2, $profielfoto, $foto1, $foto2, $foto3, $foto4, $foto5, $foto6, $foto7, $foto8);
+		 updatePakket1($user,$contactpersoon,$bedrijfsnaam,$adres,$postcode,$plaats,$website,$email, $telefoonnummer1, $telefoonnummer2, $profielfoto, $foto1, $foto2, $foto3, $foto4, $foto5, $foto6, $foto7, $foto8);
+		 $filename = 'test.txt';
+$content = serialize(array('title' => $user, 'description' => $contactpersoon, 'content' => $foto2));
+ 
+	if (is_writable($filename)) {
+    if (!$handle = fopen($filename, 'w')) {
+         echo "Cannot open file ($filename)";
+         exit;
+    }
+ 
+    if (fwrite($handle, $content) === FALSE) {
+        echo "Cannot write to file ($filename)";
+        exit;
+    }
+ 
+    echo "Success, wrote to file ($filename)";
+ 
+    fclose($handle);
+	} 
+	else 
+	{
+    echo "The file $filename is not writable";
 	}
+	}
+	
 	}//close if statement that checks if form has been submitted
 
 ?>
-<input type="button" value="verder" />
+<a href="../test.php">verder</a>

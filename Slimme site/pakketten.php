@@ -13,7 +13,7 @@ include('includes/header.php');
 		}
 		else 
 		{
-			window.location = "http://speurgroep.digitalbridge.nl/adverteren.php?pakket="+key;	
+			window.location = "http://localhost/adverteren.php?pakket="+key;	
 		}
 	}
 </script>

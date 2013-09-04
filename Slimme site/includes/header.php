@@ -29,17 +29,17 @@
 
 <body>
 <?php include('DBinteraction.php'); 
-$host = 'http://speurgroep.digitalbridge.nl/';
+$host = 'http://localhost/';
 if (!empty($_SESSION['myusername'])){
 $currentbranche = current_branche($_SESSION['myusername']);
 $branche = mysql_fetch_array($currentbranche);
 }
 ?>
 <form>
-<input type="hidden" name="user" value="<?php echo $_SESSION['myusername'] ?>" id="user" />
+<input type="hidden" name="user" value="<?php if (!empty($_SESSION['myusername'])){echo $_SESSION['myusername'];} ?>" id="user" />
 </form>
 <form>
-<input type="hidden" name="branche" value="<?php echo $branche['brancheID'] ?>" id="branche" />
+<input type="hidden" name="branche" value="<?php if (!empty($_SESSION['myusername'])){echo $branche['brancheID'];} ?>" id="branche" />
 </form>
 <div class="center">
 <div class="logo">

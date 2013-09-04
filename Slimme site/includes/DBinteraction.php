@@ -31,33 +31,36 @@
 	  
   }
   
-  function updatePakket3($pakket, $user, $contactpersoon, $bedrijfsnaam, $adres, $postcode, $plaats, $website, $email)
+  function updatePakket3($user, $contactpersoon, $bedrijfsnaam, $adres, $postcode, $plaats, $website, $email)
   {
 	openDB();
+	$pakketid = 3;
 	// update naw gegevens
 	mysql_query("UPDATE bedrijf SET contactpersoon = '$contactpersoon', bedrijfsnaam = '$bedrijfsnaam', adres = '$adres', postcode = '$postcode', plaats = '$plaats', website = '$website', email = '$email' WHERE userid = '$user'");
 	 //update pakketkeuze + profiel foto
-	mysql_query("UPDATE user SET pakketid = '$pakket' WHERE userid = '$user'");
+	mysql_query("UPDATE user SET pakketid = '$pakketid' WHERE userid = '$user'");
   }
   
   function updatePakket2($user, $contactpersoon, $bedrijfsnaam, $adres, $postcode, $plaats, $website, $email, $telefoonnummer1, $telefoonnummer2, $profielfoto)
   {
 	openDB();
+	$pakketid = 2;
 	//update naw gegevens + telefoonnummers
 	mysql_query("UPDATE bedrijf SET contactpersoon = '$contactpersoon', bedrijfsnaam = '$bedrijfsnaam', adres = '$adres', postcode = '$postcode', plaats = '$plaats', website = '$website', email = '$email', telefoonnummer1 = '$telefoonnummer1', telefoonnummer2 = '$telefoonnummer2' WHERE userid = '$user'");
 	 //update pakketkeuze + profiel foto
-	mysql_query("UPDATE user SET profielfoto = '$profielfoto', $pakketid = '$pakket' WHERE userid = '$user'");
+	mysql_query("UPDATE user SET profielfoto = '$profielfoto', pakketid = '$pakketid' WHERE userid = '$user'");
   }
   
-  function updatePakket1($pakket, $user,$contactpersoon,$bedrijfsnaam,$adres,$postcode,$plaats,$website,$email, $telefoonnummer1, $telefoonnummer2, $profielfoto, $foto1, $foto2, $foto3, $foto4, $foto5, $foto6, $foto7, $foto8) 
+  function updatePakket1($user,$contactpersoon,$bedrijfsnaam,$adres,$postcode,$plaats,$website,$email, $telefoonnummer1, $telefoonnummer2, $profielfoto, $foto1, $foto2, $foto3, $foto4, $foto5, $foto6, $foto7, $foto8) 
   {
 	 openDB();
+	 $pakketid = 1;
 	 //update naw gegevens + telefoonnummers
-	 mysql_query("UPDATE bedrijf SET contactpersoon = '$contactpersoon', bedrijfsnaam = '$bedrijfsnaam', adres = '$adres', postcode = '$postcode', plaats = '$plaats', website = '$website', email = '$email', telefoonnummer1 = '$telefoonnummer1', telefoonnummer2 = '$telefoonnummer2' WHERE userid = '$user'");
+	 mysql_query("INSERT INTO bedrijf (bedrijfsid, userid, contactpersoon, bedrijfsnaam, adres, postcode, plaats, website, email, telefoonnummer1, telefoonnummer2) VALUES ('', '$user', '$contactpersoon', '$bedrijfsnaam', '$adres', '$postcode', '$plaats', '$website', '$email', '$telefoonnummer1', '$telefoonnummer2') ON DUPLICATE KEY UPDATE contactpersoon = '$contactpersoon', bedrijfsnaam = '$bedrijfsnaam', adres = '$adres', postcode = '$postcode', plaats = '$plaats', website = '$website', email = '$email', telefoonnummer1 = '$telefoonnummer1', telefoonnummer2 = '$telefoonnummer2'")or die('Could not enter data: ' . mysql_error());
 	 //update pakketkeuze + profiel foto
-	mysql_query("UPDATE user SET profielfoto = '$profielfoto', $pakketid = '$pakket' WHERE userid = '$user'");
-	 //update foto`s
-	mysql_query("INSERT INTO user_foto (userid, foto1, foto2, foto3, foto4, foto5, foto6, foto7, foto8) VALUES ('$user',$foto1, $foto2, $foto3, $foto4, $foto5, $foto6, $foto7, $foto8)");
+	mysql_query("UPDATE user SET profielfoto = '$profielfoto', pakketid = '$pakketid' WHERE userid = '$user'");
+	 //upload foto`s
+	mysql_query("INSERT INTO user_foto (userid, foto1, foto2, foto3, foto4, foto5, foto6, foto7, foto8) VALUES ('$user', '$foto1', '$foto2', '$foto3', '$foto4', '$foto5', '$foto6', '$foto7', '$foto8') ON DUPLICATE KEY UPDATE foto1 = values(foto1), foto2 = values(foto2), foto3 = values(foto3), foto4 = values(foto4), foto5 = values(foto5), foto6 = values(foto6), foto7 = values(foto7), foto8 = values(foto8)") or die('Could not enter data: ' . mysql_error());
 	  
   }
   
@@ -199,7 +202,7 @@
 		closeDB();
   }
   
-  function generateActivatiecode($length = 10) {
+  function generateRandomcode($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $randomString = '';
     for ($i = 0; $i < $length; $i++) {

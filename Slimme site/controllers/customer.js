@@ -1,18 +1,15 @@
 // JavaScript Document
-function customerCtrl($scope)
+function customerCtrl($scope, $location)
 {
 	$scope.categories = $.ajax({
-		  url: "includes/loadCategorie.php",
+		  url: "API/loadCategorie.php",
 		  dataType:"json",
 		  async: false
 		  });
 		
-	$scope.branchesInCategory = function(category)
+	
+	$scope.toBranche = function(bracheNaam)
 	{
-		return $.ajax({
-		  url: "includes/loadBranche_cat.php?id=" + category,
-		  dataType:"json",
-		  async: false
-		  });	
+		$location.path("index.php");
 	}
 }

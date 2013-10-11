@@ -15,7 +15,7 @@ include('includes/header.php');
         		</div>
         	</div>
             <div class="row">
-            	<div class="large-3 columns" ng-repeat="category in categories">
+            	<div class="large-3 columns" ng-repeat="category in categories | filter:search">
             		<h3>{{category['naam']}}</h3>
             		<div class="branche" ng-repeat="branche in category['branches']">
             			<a ng-click="toBranche(branche)">{{branche}}</a>

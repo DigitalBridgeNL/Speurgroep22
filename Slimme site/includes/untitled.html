@@ -1,0 +1,100 @@
+//Directory waar de foto`s worden opgeslagen
+	$target = "../images/"; 
+	$targetp = $target . $profielfoto;
+	$target1 = $target . $foto1;
+	$target2 = $target . $foto2;
+	$target3 = $target . $foto3;
+	$target4 = $target . $foto4;
+	$target5 = $target . $foto5;
+	$target6 = $target . $foto6;
+	$target7 = $target . $foto7;
+	$target8 = $target . $foto8;
+
+	//Writes the photo to the server 
+	if(move_uploaded_file($_FILES['profielfoto']['tmp_name'], $targetp)) 
+	{
+	 $uploadfotosucces = 'p';
+	}
+	//Writes the photo to the server 
+	if(move_uploaded_file($_FILES['foto1']['tmp_name'], $target1)) 
+	{
+	 $uploadfotosucces = 1;
+	}
+	//Writes the photo to the server 
+	if(move_uploaded_file($_FILES['foto2']['tmp_name'], $target2)) 
+	{
+	 $uploadfotosucces = 2;
+	}
+	//Writes the photo to the server 
+	if(move_uploaded_file($_FILES['foto3']['tmp_name'], $target3)) 
+	{
+	 $uploadfotosucces = 3;
+	}
+	//Writes the photo to the server 
+	if(move_uploaded_file($_FILES['foto4']['tmp_name'], $target4)) 
+	{
+	 $uploadfotosucces = 4;
+	}
+	//Writes the photo to the server 
+	if(move_uploaded_file($_FILES['foto5']['tmp_name'], $target5)) 
+	{
+	 $uploadfotosucces = 5;
+	}
+	//Writes the photo to the server 
+	if(move_uploaded_file($_FILES['foto6']['tmp_name'], $target6)) 
+	{
+	 $uploadfotosucces = 6;
+	}
+	//Writes the photo to the server 
+	if(move_uploaded_file($_FILES['foto7']['tmp_name'], $target7)) 
+	{
+	 $uploadfotosucces = 7;
+	}
+	//Writes the photo to the server 
+	if(move_uploaded_file($_FILES['foto8']['tmp_name'], $target8)) 
+	{
+	 $uploadfotosucces = 8;
+	}
+    
+    			$profielfoto = generateRandomcode(8).($_FILES['profielfoto']['name']);
+			$foto1 = generateRandomcode(8).($_FILES['foto1']['name']);
+			$foto2 = generateRandomcode(8).($_FILES['foto2']['name']);
+			$foto3 = generateRandomcode(8).($_FILES['foto3']['name']);
+			$foto4 = generateRandomcode(8).($_FILES['foto4']['name']);
+			$foto5 = generateRandomcode(8).($_FILES['foto5']['name']);
+			$foto6 = generateRandomcode(8).($_FILES['foto6']['name']);
+			$foto7 = generateRandomcode(8).($_FILES['foto7']['name']);
+			$foto8 = generateRandomcode(8).($_FILES['foto8']['name']);
+            
+            
+            <div id="option_pakket1n2_profielfoto">
+	<p class="grey_titel"> Voeg uw profiel foto / logo toe</p>
+    	<div class='row panel'>
+			<div class='large-9 columns'>
+            <input type="file" name="profielfoto" />
+            </div>
+     	</div>
+</div>
+<div id="option_pakket1_fotos">
+	<p class="grey_titel"> Voeg uw profiel foto / logo toe</p>
+    	<div class='row panel'>
+			<div class='large-9 columns'>
+            <label> Foto 1 </label>
+            <input type="file" name="foto1" />
+            <label> Foto 2 </label>
+            <input type="file" name="foto2" />
+            <label> Foto 3 </label>
+            <input type="file" name="foto3" />
+            <label> Foto 4 </label>
+            <input type="file" name="foto4" />
+            <label> Foto 5 </label>
+            <input type="file" name="foto5" />
+            <label> Foto 6 </label>
+            <input type="file" name="foto6" />
+            <label> Foto 7 </label>
+            <input type="file" name="foto7" />
+            <label> Foto 8 </label>
+            <input type="file" name="foto8" />
+            </div>
+     	</div>
+</div>

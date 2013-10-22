@@ -64,6 +64,37 @@
 	  
   }
   
+  function updatebedrijf($contactpersoon, $bedrijfsnaam, $adres, $postcode, $plaats, $website, $email, $telefoonnummer1, $telefoonnummer2, $user){
+	//update naw gegevens + telefoonnummers
+	 $sql = mysql_query("INSERT INTO bedrijf (bedrijfsid, userid, contactpersoon, bedrijfsnaam, adres, postcode, plaats, website, email, telefoonnummer1, telefoonnummer2) VALUES ('', '$user', '$contactpersoon', '$bedrijfsnaam', '$adres', '$postcode', '$plaats', '$website', '$email', '$telefoonnummer1', '$telefoonnummer2') ON DUPLICATE KEY UPDATE contactpersoon = '$contactpersoon', bedrijfsnaam = '$bedrijfsnaam', adres = '$adres', postcode = '$postcode', plaats = '$plaats', website = '$website', email = '$email', telefoonnummer1 = '$telefoonnummer1', telefoonnummer2 = '$telefoonnummer2'")or die('Could not enter data: ' . mysql_error());
+	 
+	 if ($sql){
+		echo "<script type='text/javascript'> $(document).ready(function() { $('#editBedrijfSucces').foundation('reveal', 'open'); }); </script>"; 
+	 }
+	  
+  }
+  
+  function insert_temp3($contactpersoon, $bedrijfsnaam, $adres, $postcode, $plaats, $website, $email, $user){
+	  
+	openDB();
+	// update naw gegevens
+	mysql_query("INSERT INTO temp_user (bedrijfsid, userid, contactpersoon, bedrijfsnaam, adres, postcode, plaats, website, email) VALUES ('', '$user', '$contactpersoon', '$bedrijfsnaam', '$adres', '$postcode', '$plaats', '$website', '$email') ON DUPLICATE KEY UPDATE contactpersoon = '$contactpersoon', bedrijfsnaam = '$bedrijfsnaam', adres = '$adres', postcode = '$postcode', plaats = '$plaats', website = '$website', email = '$email'")or die('Could not enter data: ' . mysql_error());
+  }
+  
+  function insert_temp2($contactpersoon, $bedrijfsnaam, $adres, $postcode, $plaats, $website, $email, $telefoonnummer1, $telefoonnummer2, $user){
+	  
+	openDB();
+	// update naw gegevens
+	mysql_query("INSERT INTO temp_user (bedrijfsid, userid, contactpersoon, bedrijfsnaam, adres, postcode, plaats, website, email, telefoonnummer1, telefoonnummer2) VALUES ('', '$user', '$contactpersoon', '$bedrijfsnaam', '$adres', '$postcode', '$plaats', '$website', '$email', '$telefoonnummer1', '$telefoonnummer2') ON DUPLICATE KEY UPDATE contactpersoon = '$contactpersoon', bedrijfsnaam = '$bedrijfsnaam', adres = '$adres', postcode = '$postcode', plaats = '$plaats', website = '$website', email = '$email', telefoonnummer1 = '$telefoonnummer1', telefoonnummer2 = '$telefoonnummer2'")or die('Could not enter data: ' . mysql_error());
+  }
+  
+  function insert_temp1($contactpersoon, $bedrijfsnaam, $adres, $postcode, $plaats, $website, $email, $telefoonnummer1, $telefoonnummer2, $user, $beschrijving, $zinbedrijf, $bedrijfsvorm, $aantaljarenervaring, $aantalmdwkrs, $kvknr){
+	  
+	openDB();
+	// update naw gegevens
+	mysql_query("INSERT INTO temp_user (bedrijfsid, userid, contactpersoon, bedrijfsnaam, adres, postcode, plaats, website, email, telefoonnummer1, telefoonnummer2, tekst, zin1bedrijf, bedrijfsvorm, aantaljarenErvaring, aantalmdwkrs, kvknr) VALUES ('', '$user', '$contactpersoon', '$bedrijfsnaam', '$adres', '$postcode', '$plaats', '$website', '$email', '$telefoonnummer1', '$telefoonnummer2', '$beschrijving', '$zinbedrijf', '$bedrijfsvorm', '$aantaljarenervaring', '$aantalmdwkrs', '$kvknr') ON DUPLICATE KEY UPDATE contactpersoon = '$contactpersoon', bedrijfsnaam = '$bedrijfsnaam', adres = '$adres', postcode = '$postcode', plaats = '$plaats', website = '$website', email = '$email', telefoonnummer1 = '$telefoonnummer1', telefoonnummer2 = '$telefoonnummer2', tekst = '$beschrijving', zin1bedrijf = '$zinbedrijf', bedrijfsvorm = '$bedrijfsvorm', aantaljarenErvaring = '$aantaljarenervaring', aantalmdwkrs = '$aantalmdwkrs', kvknr = '$kvknr'") or die('Could not enter data: ' . mysql_error());
+  }
+  
   function specialisaties($currentbranche)
   {
 	openDB();

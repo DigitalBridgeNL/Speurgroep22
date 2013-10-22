@@ -19,6 +19,12 @@ $myusername = stripslashes($myusername);
 $mypassword = stripslashes($mypassword);
 $myusername = mysql_real_escape_string($myusername);
 $mypassword = mysql_real_escape_string($mypassword);
+$sql="SELECT * FROM $tbl_name WHERE username='$myusername'";
+$result=mysql_query($sql) or die('Error : '.mysql_error());
+$row = mysql_fetch_assoc($result);
+$zout = $row['salt'];
+$zoutnpass = $zout + $mypassword;
+$mypassword = hash('sha256', $zoutnpass);
 $sql="SELECT * FROM $tbl_name WHERE username='$myusername' and password='$mypassword'";
 $result=mysql_query($sql) or die('Error : '.mysql_error());
 

@@ -36,15 +36,7 @@ $branche = $row['brancheID'];
 </script>
 <!-- Start van Contact categorie !-->
 <div class="clear"></div>
-<?php if($_GET['pakket'] == 1){?>
-<p class="grey_titel">U hebt gekozen voor pakket 1</p>
-<?php }?>
-<?php if($_GET['pakket'] == 2){?>
-<p class="grey_titel">U hebt gekozen voor pakket 2</p>
-<?php }?>
-<?php if($_GET['pakket'] == 3){?>
-<p class="grey_titel">U hebt gekozen voor het gratis pakket</p>
-<?php }?>
+<p class="grey_titel">Stap 2: Gegevens invullen</p>
 <h3> Persoonlijke gegevens </h3>
 <form enctype="multipart/form-data" class="custom" name="bestelling" onSubmit="submitForm()" method="post" action="includes/updateUser.php">
 <div id="option_pakket1_banner">
@@ -153,37 +145,7 @@ $branche = $row['brancheID'];
 		</div>
 	</div>
 </div>
-<div id="option_pakket1n2_profielfoto">
-	<p class="grey_titel"> Voeg uw profiel foto / logo toe</p>
-    	<div class='row panel'>
-			<div class='large-9 columns'>
-            <input type="file" name="profielfoto" />
-            </div>
-     	</div>
-</div>
-<div id="option_pakket1_fotos">
-	<p class="grey_titel"> Voeg uw profiel foto / logo toe</p>
-    	<div class='row panel'>
-			<div class='large-9 columns'>
-            <label> Foto 1 </label>
-            <input type="file" name="foto1" />
-            <label> Foto 2 </label>
-            <input type="file" name="foto2" />
-            <label> Foto 3 </label>
-            <input type="file" name="foto3" />
-            <label> Foto 4 </label>
-            <input type="file" name="foto4" />
-            <label> Foto 5 </label>
-            <input type="file" name="foto5" />
-            <label> Foto 6 </label>
-            <input type="file" name="foto6" />
-            <label> Foto 7 </label>
-            <input type="file" name="foto7" />
-            <label> Foto 8 </label>
-            <input type="file" name="foto8" />
-            </div>
-     	</div>
-</div>
+
 <div class="row">
 <div class="large-12 columns panel callout">
 <p> Heeft u alle gegevens ingevuld klik dan op de knop verder om door te gaan met uw bestelling. </p>

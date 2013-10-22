@@ -63,7 +63,7 @@ function loadBedrijf(){
 		success: function(data) {
 			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
 			for (i = 0; i < data.length; i += 1) {
-			strHTML += "<div class='row'><div class='large-9 columns'><form>"
+			strHTML += "<div class='row'><div class='large-9 columns'><form method='post'>"
 			strHTML += "<label>Contactpersoon</label><input type='text' name='contactpersoon' value='" + data[i]['contactpersoon'] + "' />"
 			strHTML += "<label>Bedrijfsnaam</label><input type='text' name='bedrijfsnaam' value='" + data[i]['bedrijfsnaam'] + "' />"
 			strHTML += "<label>Woon / Vestigingsadres</label><input type='text' name='adres' value='" + data[i]['adres'] + "' />"
@@ -72,7 +72,7 @@ function loadBedrijf(){
 			strHTML += "<label>Website</label><input type='text' name='website' value='" + data[i]['website'] + "' />"
 			strHTML += "<label>E-Mailadres</label><input type='text' name='email' value='" + data[i]['email'] + "' />"
 			strHTML += "<label>Telefoonnummer 1</label><input type='text' name='telefoonnummer1' value='" + data[i]['telefoonnummer1'] + "' />"
-			strHTML += "<label>Telefoonnummer 2</label><input type='text' name='telefoonnummer2' value='" + data[i]['telefoonnummer2'] + "' />"
+			strHTML += "<label>Telefoonnummer 2</label><input type='text' name='telefoonnummer2' value='" + data[i]['telefoonnummer2'] + "' /><input type='submit' class='button secundary' name='updatebedrijf' value='gegevens wijzigen'/>"
 			strHTML += "</form></div></div>"
 			}
 			$("#loadBedrijf").html(strHTML); // string wordt in het element met ID contentPage geplaatst.
@@ -132,6 +132,58 @@ function loadPakket(){
 			$("#loadPakket").html(strHTML); // string wordt in het element met ID contentPage geplaatst.
 			}
 		});
+};
+
+function loadContract(){
+		var currentUser = document.getElementById('user').value;
+		$.ajax({
+		type: 'get',
+		url: 'includes/loadContract.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		data: 'id='+currentUser,
+		success: function(data) {
+			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
+			for (i = 0; i < data.length; i += 1) {
+			strHTML += "<table><tr><td>Contract</td><td><a href='" + data[i]['contract'] + "'>Download</a></td></tr>"
+			strHTML += "</table>"
+			}
+			$("#loadContract").html(strHTML); // string wordt in het element met ID contentPage geplaatst.
+			}
+		});
+};
+
+function loadMelding(){
+		var currentUser = document.getElementById('user').value;
+		$.ajax({
+		type: 'get',
+		url: 'includes/loadMelding.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		data: 'id='+currentUser,
+		success: function(data) {
+			var i, j, strHTML = "";
+			strHTML += ""
+			for (i = 0; i < data.length; i += 1) {
+			strHTML += "<tr><td>" + data[i]['datum'] + "</td><td>" + data[i]['onderwerp'] + "</td><td><a id='" + data[i]['meldingID'] + "' href='javascript:readMelding();'>Lees</a></td></tr>"
+			}
+			$("#loadMelding").html(strHTML); // string wordt in het element met ID contentPage geplaatst.
+			}
+		});
+};
+
+function readMelding(){
+	$("#loadMelding").delegate('a', 'click', function() {
+		var meldingID = $(this).attr('id');
+		console.log(meldingID);
+		$.ajax({
+		type: 'get',
+		url: 'includes/load_currentMelding.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		data: 'id='+meldingID,
+		success: function(data) {
+			var strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
+			strHTML += "<p class='grey_titel'>Melding | "+data[0]['onderwerp']+"</p>"
+			strHTML += "<p class=''>"+data[0]['tekst']+"</p>"
+			$("#meldingdetail").html(strHTML);
+			}
+		});
+	});
 };
 
 function add_specialisatie(){

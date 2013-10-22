@@ -5,6 +5,19 @@ if ($_SESSION['myusername'] == '')
     echo 'the session is empty';
 }
 else {
+	if (isset($_POST['updatebedrijf'])){
+		$user = $_SESSION['myusername'];
+		$contactpersoon = $_POST['contactpersoon'];
+		$bedrijfsnaam = $_POST['bedrijfsnaam'];
+		$adres = $_POST['adres'];
+		$postcode = $_POST['postcode'];
+		$plaats = $_POST['plaats'];
+		$website = $_POST['website'];
+		$email = $_POST['email'];
+		$telefoonnummer1 = $_POST['telefoonnummer1'];
+		$telefoonnummer2 = $_POST['telefoonnummer2'];			
+		updatebedrijf($contactpersoon, $bedrijfsnaam, $adres, $postcode, $plaats, $website, $email, $telefoonnummer1, $telefoonnummer2, $user);
+	}
 ?>
 
 <div class="clear"></div>
@@ -14,6 +27,8 @@ else {
 		loadLogin();
 		loadBranche();
 		loadPakket();
+		loadContract();
+		loadMelding();
     });
 </script>
 
@@ -27,31 +42,31 @@ else {
         <section>
           <p class="title"><a href="#section1-1">Inloggegevens</a></p>
           <div class="content panel" id="loadLogin">
-            <p>Login....</p>
+            <p>Uw login gegevens worden geladen...</p>
           </div>
         </section>
         <section>
           <p class="title"><a href="#section1-2">Contract</a></p>
           <div class="content" id="loadContract">
-            <p>Contract...</p>
+            <p>Uw contract gegevens worden geladen...</p>
           </div>
         </section>
 		<section>
           <p class="title"><a href="#section1-3">Gekozenbranches</a></p>
           <div class="content" id="loadBranches">
-            <p>Gekozen branches...</p>
+            <p>Uw branches worden geladen...</p>
           </div>
         </section>
 		<section>
           <p class="title"><a href="#section1-4">Pakketkeuze</a></p>
           <div class="content" id="loadPakket">
-            <p>Pakketkeuze...</p>
+            <p>Uw pakketkeuze wordt geladen...</p>
           </div>
         </section>
 		<section>
           <p class="title"><a href="#section1-5">Bedrijfsgegevens</a></p>
           <div class="content" id="loadBedrijf">
-            <p>Bedrijfsgegevens...</p>
+            <p>Uw bedrijfsgegevens worden geladen...</p>
           </div>
         </section>
     </div>
@@ -60,36 +75,28 @@ else {
   <section>
     <p class="title" data-section-title><a href="#">Meldingen</a></p>
     <div class="content" data-slug="section2" data-section-content>
-      <p>Content of section 2.</p>
+      <p>Hier vindt u alle informatie met betrekking tot meldingen, offertes van consumenten en nieuwsbrieven van speurgroep.</p>
 	  <div class="section-container auto" data-section>
         <section>
           <p class="title"><a href="#section2-1">Offertes</a></p>
           <div class="content">
-            <p>Login....</p>
+            <p>Uw offertes worden geladen...</p>
           </div>
         </section>
         <section>
           <p class="title"><a href="#section2-2">Mededelingen</a></p>
           <div class="content">
-            <p>Contract...</p>
+              <table>
+             	<thead><th>Datum</th><th>Onderwerp</th><th>open</th></thead>
+                <tbody id="loadMelding"></tbody>
+              </table>
+              <div id="meldingdetail"></div>
           </div>
         </section>
 		<section>
           <p class="title"><a href="#section2-3">Nieuwsbrieven</a></p>
           <div class="content">
-            <p>Gekozen branches...</p>
-          </div>
-        </section>
-		<section>
-          <p class="title"><a href="#section2-4">Pakketkeuze</a></p>
-          <div class="content">
-            <p>Pakketkeuze...</p>
-          </div>
-        </section>
-		<section>
-          <p class="title"><a href="#section2-5">Bedrijfsgegevens</a></p>
-          <div class="content">
-            <p>Bedrijfsgegevens...</p>
+            <p>De nieuwsbrieven worden geladen...</p>
           </div>
         </section>
     </div>

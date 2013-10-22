@@ -18,6 +18,7 @@ include('includes/header.php');
 	}
 </script>
 <div class="clear"></div>
+<p class="grey_titel">Stap 1: Pakket kiezen</p>
 	<h3 class="centerTxt"> Pakketten </h3>
 	<div class="row">
 		<div class="large-12 columns panel">

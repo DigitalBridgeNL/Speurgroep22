@@ -2,6 +2,7 @@
 		header('Content-type: application/json');
 		// Verbinding met de database
 		include('DBconnection.php');
+		$result = mysql_query("SELECT * FROM branche_categorie");
 		if($result)
 		{
 			$categories = array();

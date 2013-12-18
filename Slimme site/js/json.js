@@ -161,29 +161,29 @@ function loadMelding(){
 			var i, j, strHTML = "";
 			strHTML += ""
 			for (i = 0; i < data.length; i += 1) {
-			strHTML += "<tr><td>" + data[i]['datum'] + "</td><td>" + data[i]['onderwerp'] + "</td><td><a id='" + data[i]['meldingID'] + "' href='javascript:readMelding();'>Lees</a></td></tr>"
+			strHTML += "<tr><td>" + data[i]['datum'] + "</td><td>" + data[i]['onderwerp'] + "</td><td><a href='javascript:readMelding("+ data[i]['meldingID'] +");'>Lees</a></td></tr>"
 			}
 			$("#loadMelding").html(strHTML); // string wordt in het element met ID contentPage geplaatst.
 			}
 		});
 };
 
-function readMelding(){
-	$("#loadMelding").delegate('a', 'click', function() {
-		var meldingID = $(this).attr('id');
+function readMelding(key){
+		var meldingID = key;
 		console.log(meldingID);
 		$.ajax({
 		type: 'get',
 		url: 'includes/load_currentMelding.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
 		data: 'id='+meldingID,
 		success: function(data) {
+			console.log(data);
 			var strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
 			strHTML += "<p class='grey_titel'>Melding | "+data[0]['onderwerp']+"</p>"
 			strHTML += "<p class=''>"+data[0]['tekst']+"</p>"
-			$("#meldingdetail").html(strHTML);
+			$("#contentMelding").html(strHTML);
+			$(document).ready(function() { $('#meldingDetail').foundation('reveal', 'open'); });
 			}
 		});
-	});
 };
 
 function add_specialisatie(){
@@ -204,4 +204,75 @@ function add_specialisatie(){
 			$("#specialisatie_add").append(bevestiging); 
 			}
 		});
-};	
+};
+
+function panelNieuwsbrief() {
+	var strHTML = "";
+	strHTML += '<form method="post" action="">';
+	strHTML += '<input type="file" name="nieuwsbrief" />';
+	strHTML += '<input type="submit" name="uploadNieuwsbrief" />';
+	strHTML += '</form>';
+	$(".content_berichten").html(strHTML)	
+}
+
+function panelOfferte(){
+		$.ajax({
+		type: 'get',
+		url: 'jsonRequests/loadOffertes.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		success: function(data) {
+			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
+			strHTML += "<table><th>Offerte ID</th><th>Bedrijf</th><th>Branche</th><th>Consumer Email</th><th>Offerte omschrijving</th>"
+			for (i = 0; i < data.length; i += 1) {
+			strHTML += "<tr><td>" + data[i]['offerte_id'] + "</td>";
+			strHTML += "<td>" + data[i]['bedrijfsnaam'] + "</td>";
+			strHTML += "<td>" + data[i]['branchenaam'] + "</td>";
+			strHTML += "<td>" + data[i]['consumermail'] + "</td>";
+			strHTML += "<td>" + data[i]['omschrijving'] + "</td></tr>";
+			}
+			strHTML += "</table>"
+			$(".content_berichten").html(strHTML); // string wordt in het element met ID contentPage geplaatst.
+			}
+		});
+};
+
+function loadOfferte(){
+		var currentUser = document.getElementById('user').value;
+		$.ajax({
+		type: 'get',
+		url: 'includes/loadOffertes_bedrijf.php?u='+currentUser, //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		success: function(data) {
+			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
+			strHTML += "<table><th>Offerte ID</th><th>Consumer Email</th><th>Offerte omschrijving</th>"
+			for (i = 0; i < data.length; i += 1) {
+			strHTML += "<tr><td>" + data[i]['offerte_id'] + "</td>";
+			strHTML += "<td>" + data[i]['consumermail'] + "</td>";
+			strHTML += "<td>" + data[i]['omschrijving'] + "</td>";
+			strHTML += "<td><a href='#' onclick='reageer_offerte("+data[i]['offerte_id']+")'>Reageren</a></td></tr>";
+			}
+			strHTML += "</table>"
+			$("#loadOffertes").html(strHTML); // string wordt in het element met ID contentPage geplaatst.
+			}
+		});
+};
+
+function request_reset_password(){
+	var email = document.getElementsByName('emailF')[0].value;
+	alert(email);	
+	$.ajax({
+		type: 'get',
+		url: 'includes/check_user_exist.php?e='+email,
+		succes: function(data) {
+			if (data.lengt > 0){
+				document.getElementById("user_error_U").style.display = "none"; 
+				$.ajax({
+					type: 'get',
+					url: 'includes/send_reset_mail.php?e='+email
+					});
+				$('#wachtwoordVergeten').trigger('reveal:close');		
+			}
+			else{
+				document.getElementById("user_error_U").style.display = "block"; 	
+			}
+		}
+	});
+}

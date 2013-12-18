@@ -1,6 +1,24 @@
 <?php
 include('includes/header.php');
 ?>
+<div id="login_pakket" class="reveal-modal medium">
+<p class="grey_titel"> Inloggen </p>
+<div class="large-6 columns">
+	<form data-abide action="includes/verifyUser2.php" method="post">
+		<label>Email adres:</label>
+		<input type="email" name="email" required>
+		<label>Wachtwoord: </label>
+		<input type="password" name="wachtwoord" required>
+		<input type=image alt="submit" class="right" src="images/inloggen.png" width="125px" height="50px"/>
+	</form>
+</div>
+<div class="large-6 columns">
+	<div class="panel">
+		<p>Tekst waarom er ingelogd moet worden en dat er een mailtje is gestuurd met inlog gegevens. Indien deze niet is ontvangen kunnen zij contact opnemen met het email adres info@speurgroep.nl of direct een link maken waarbij ze hun account kunnen opvragen.</p>
+	</div>
+</div>
+<a class="close-reveal-modal">&#215;</a>
+</div>
 <script>
     $( window ).load(function() {
     });
@@ -112,5 +130,4 @@ include('includes/header.php');
 		</form>
 	</div>	
 <?php 
-include('includes/modals.php');
 include('includes/footer.php');?>

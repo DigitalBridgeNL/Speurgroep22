@@ -30,6 +30,10 @@
   background:#3D5A97;
   color:white;
 }
+
+#table-wrapper table tr {
+	border-bottom: 1px white solid;
+}
 #table-wrapper table thead th .text {
   position:absolute;   
   top:-20px;

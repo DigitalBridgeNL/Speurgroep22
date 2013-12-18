@@ -19,13 +19,17 @@ $myusername = stripslashes($myusername);
 $mypassword = stripslashes($mypassword);
 $myusername = mysql_real_escape_string($myusername);
 $mypassword = mysql_real_escape_string($mypassword);
+$result1 = mysql_query("SELECT * FROM $tbl_name WHERE username='$myusername'") or die('Error : '.mysql_error());
+$row1 = mysql_fetch_array($result1);
+$zout = $row1['salt'];
+$mypassword = hash('sha256', $zout.$mypassword);
+
 $sql="SELECT * FROM $tbl_name WHERE username='$myusername' and password='$mypassword'";
 $result=mysql_query($sql) or die('Error : '.mysql_error());
 
 // Mysql_num_row is counting table row
 $count=mysql_num_rows($result);
 $row = mysql_fetch_assoc($result);
-
 // If result matched $myusername and $mypassword, table row must be 1 row
 if($count==1){
 // Register $myusername, $mypassword and redirect to file "index.php"

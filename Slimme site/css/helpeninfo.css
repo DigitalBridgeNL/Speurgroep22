@@ -3,7 +3,7 @@
 	float: left;
 	width: 185px;
 	border:none;
-	font-size: 10px;
+	font-size: 12px;
 	padding-left: 15px;
 }
 
@@ -21,7 +21,7 @@
 #pageContent {
 	float: left;
 	width: 450px;
-	font-size: 10px;
+	font-size: 12px;
 }
 
 #pageContent p:first-child {

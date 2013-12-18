@@ -248,6 +248,71 @@
 		mail($to, $subject, $body);
  }
  
+ function getBedrijfinfo($bedrijfsid){
+	 openDB();
+	$result = mysql_query("SELECT u.userID, b.bedrijfsnaam, b.adres, b.postcode, b.plaats, b.website, b.email, b.telefoonnummer1, b.telefoonnummer2, u.profielfoto, u.pakketid, ei.beschrijving, ei.bedrijfsvorm, ei.aantaljarenErvaring, ei.aantalmdwkrs, ei.kvknr, uf.foto1, uf.foto2, uf.foto3, uf.foto4, uf.foto5, uf.foto6, uf.foto7, uf.foto8 FROM bedrijf b, user u, extra_info ei, user_foto uf WHERE u.userID = b.userid AND u.userID = ei.user_ID AND u.userID = uf.userid AND b.bedrijfsid = '$bedrijfsid' GROUP BY u.userID")or die('Error ' . mysql_error());
+	return $result;
+	 
+ }
+ 
+ function getbrancheID_basedOnbedrijfid($bedrijfsid){
+	  openDB();
+	$result = mysql_query("SELECT u.brancheID FROM user u, branche br, bedrijf be WHERE u.userID = be.userID AND br.brancheID = u.brancheID AND be.bedrijfsID = '$bedrijfsid'")or die('Error ' . mysql_error());
+	$row = mysql_fetch_array($result);
+	return $row['brancheID']; 
+ }
+ 
+ function check_duplicate_username($username){
+	$result = mysql_query("SELECT * FROM user WHERE username = '$username'");
+	$count = mysql_num_rows($result);
+	return $count; 
+ }
+ 
+ function mailto($sendTo, $sendFrom, $onderwerp, $content, $contactpersoon, $plaintext, $debug){
+		date_default_timezone_set('Etc/UTC');
+		require '../mail/PHPMailerAutoload.php';
+			//Create a new PHPMailer instance
+			$mail = new PHPMailer();
+			//Tell PHPMailer to use SMTP
+			$mail->isSMTP();
+			//Enable SMTP debugging
+			// 0 = off (for production use)
+			// 1 = client messages
+			// 2 = client and server messages
+			$mail->SMTPDebug = $debug;
+			//Ask for HTML-friendly debug output
+			$mail->Debugoutput = 'html';
+			//Set the hostname of the mail server
+			$mail->Host = "smtp.nbrix.nl";
+			//Set the SMTP port number - likely to be 25, 465 or 587
+			$mail->Port = 25;
+			//Whether to use SMTP authentication
+			$mail->SMTPAuth = true;
+			//Username to use for SMTP authentication
+			$mail->Username = "no-reply@nbrix.nl";
+			//Password to use for SMTP authentication
+			$mail->Password = "letmein4now";
+			//Set who the message is to be sent from
+			$mail->setFrom($sendFrom, 'NBrIX');
+			//Set an alternative reply-to address
+			$mail->addReplyTo($sendFrom, 'NBrIX');
+			//Set who the message is to be sent to
+			$mail->addAddress($sendTo, $contactpersoon);
+			//Set the subject line
+			$mail->Subject = $onderwerp;
+			//Read an HTML message body from an external file, convert referenced images to embedded,
+			//convert HTML into a basic plain-text alternative body
+			$mail->msgHTML($content);
+			//Replace the plain text body with one created manually
+			$mail->AltBody = $plaintext;	
+			if (!$mail->send()) {
+				
+			} else {
+				
+			}
+			
+		}
+ 
  
 
   

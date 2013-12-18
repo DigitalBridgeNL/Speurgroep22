@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Admin Panel</title>
-        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-        <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-        <script type="text/javascript" src="../js/jquery.form.js"></script>
-        <script type="text/javascript" src="../js/json.js"></script>
-        <link href="../css/adminpanel.css" rel="stylesheet" type="text/css">
+<?php
+	include('includes/header.php');
+?>
+<div class="clear"></div>
         <style>
             .cke_contents {
                 height: 400px !important;
             }
-        </style>
-    
-    </head>
-    
+        </style>   
     <script>
  $(document).ready(function() {
       $("#searchInput").keyup(function(){
@@ -51,9 +42,6 @@
 	});
 </script>
     <body>
-    <?php
-	include('../includes/DBinteraction.php');
-	?>
     <div class="pages">
     <input id="searchInput" value="Type To Filter"><br/>
     	<div id="table-wrapper">
@@ -83,5 +71,4 @@
   	}	
 	?>
     </div>
-</body>
-</html>
+</div><!-- close div center !-->

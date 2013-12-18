@@ -19,7 +19,53 @@ else {
 		updatebedrijf($contactpersoon, $bedrijfsnaam, $adres, $postcode, $plaats, $website, $email, $telefoonnummer1, $telefoonnummer2, $user);
 	}
 ?>
+<!-- modals voor mijnspeurgroep pagina !-->
+<div id="editWWSucces" class="reveal-modal small">
+<p> Uw wachtwoord is met succes gereset!</p>
+</div>
+<div id="editBedrijfSucces" class="reveal-modal small">
+<p> Uw gegevens zijn gewijzigd.</p>
+<a class="close-reveal-modal">&#215;</a>
+</div>
 
+<div id='meldingDetail' class='reveal-modal small'>
+<div id="contentMelding"></div>
+<a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="editWW" class="reveal-modal small">
+<?php
+	// wanneer er op verzenden is geklikt controleer of het e-mail adres bestaat.
+	if ( isset( $_POST['editWW'] ) ) {
+		echo 'dwadwadwa';
+	$passNEW1 = $_POST['password_NEW1'];
+	$passNEW2 = $_POST['password_NEW2'];
+	if ($passNEW1 == $passNEW2) {
+	openDB();
+	$getSalt = mysql_query("SELECT salt FROM user WHERE userID='".$_SESSION['myusername']."'");
+	$row = mysql_fetch_array($getSalt);
+	$salt = $row['salt'];
+	$passNEW1 = hash('sha256', $salt.$passNEW1);
+	$sql="UPDATE user SET password='$passNEW1' WHERE userID='".$_SESSION['myusername']."'";
+	$result=mysql_query($sql) or die('Error : '.mysql_error());
+	closeDB();
+	echo "<script type='text/javascript'> $(document).ready(function() { $('#editWWSucces').foundation('reveal', 'open'); }); </script>";
+	}
+	else {
+	echo '<p>Wachtwoorden komen niet overeen, probeer opnieuw</p>';
+	echo "<script type='text/javascript'> $(document).ready(function() { $('#editWW').foundation('reveal', 'open'); }); </script>";
+	}}
+?>
+		<p class="grey_titel"> Wachtwoord aanpassen </p>
+			<form action="mijnSpeurgroep.php" method="post" class="panel">
+				<label>Nieuw wachtwoord: </label>
+				<input type="password" name="password_NEW1">
+				<label>Wachtwoord nogmaals:</label>
+				<input type="password" name="password_NEW2">
+				<input type="submit" class="small button" name="editWW" />
+			</form>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
 <div class="clear"></div>
 <script>
     $( window ).load(function() {
@@ -29,6 +75,7 @@ else {
 		loadPakket();
 		loadContract();
 		loadMelding();
+		loadOfferte();
     });
 </script>
 
@@ -79,8 +126,8 @@ else {
 	  <div class="section-container auto" data-section>
         <section>
           <p class="title"><a href="#section2-1">Offertes</a></p>
-          <div class="content">
-            <p>Uw offertes worden geladen...</p>
+          <div class="content" id="loadOffertes">
+         	
           </div>
         </section>
         <section>
@@ -90,7 +137,6 @@ else {
              	<thead><th>Datum</th><th>Onderwerp</th><th>open</th></thead>
                 <tbody id="loadMelding"></tbody>
               </table>
-              <div id="meldingdetail"></div>
           </div>
         </section>
 		<section>

@@ -9,6 +9,7 @@
   <title>Speurgroep</title>
   <link rel="stylesheet" href="../css/normalize.css" />
   <link href="../css/header.css" rel="stylesheet" type="text/css" />
+  <link href="../css/bedrijf.css" rel="stylesheet" type="text/css" />
   <link href="../css/contact.css" rel="stylesheet" type="text/css" />
   <link href="../css/mijnspeurgroep.css" rel="stylesheet" type="text/css" />
   <link href="../css/login.css" rel="stylesheet" type="text/css" />
@@ -16,7 +17,6 @@
   <link href="../css/helpeninfo.css" rel="stylesheet" type="text/css" />
   <link href="../css/adverteren.css" rel="stylesheet" type="text/css" />
   <link href="../css/foundation.css" rel="stylesheet">
-  <script type="text/javascript" src="../js/sha512.js"></script>
   <script type="text/javascript" src="../js/forms.js"></script>
   <script type="text/javascript" src="../js/functions.js"></script>
   <script type="text/javascript" src="../js/angular.min.js"></script>

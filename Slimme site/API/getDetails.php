@@ -1,6 +1,6 @@
 <?php
 		header('Content-type: application/json');
 		// Verbinding met de database
-		include('DBinteraction.php');
-		showAllpages();		
+		include('../includes/DBinteraction.php');
+		get_contentPage();
 ?>

@@ -1,10 +1,10 @@
 // JavaScript Document
 function getContactdata(){
-			$.getJSON('../includes/getContactdata.php', function(data) {
+			$.getJSON('../API/getContactdata.php', function(data) {
 			console.log(data);
 				var i, j, strHTML = "";
 				for (i = 0; i < data.length; i += 1) {
-					strHTML += "<tr><td>Contact:</td><td>" + data[i]['username'] + "</td></tr>";
+					strHTML += "<tr><td>Contact:</td><td>" + data[i]['email'] + "</td></tr>";
 					strHTML += "<tr><td>K.v.K. nummer:</td><td>" + data[i]['kvknr'] + "</td></tr>";
 					strHTML += "<tr><td>BTW nummer:</td><td>" + data[i]['btwnr'] + "</td></tr>";
 					}
@@ -13,7 +13,7 @@ function getContactdata(){
 };
 
 function getHelpNinfopages(){
-		$.getJSON('includes/getPages.php', function(data) { // Haal informatie op van getPages, hierin staat een query dat alle pagina`s van een bepaalde categorie ophaalt.
+		$.getJSON('../API/getPages.php', function(data) { // Haal informatie op van getPages, hierin staat een query dat alle pagina`s van een bepaalde categorie ophaalt.
 			console.log(data); // log de data ter controle in het console
 				var i, j, strHTML = ""; // i = het aantal records, j is de specifieke kolom van het record, strHTML is de string van html dat door javascript aangemaakt zal worden
 				for (i = 0; i < data.length; i += 1) {
@@ -24,7 +24,7 @@ function getHelpNinfopages(){
 };
 
 function getAllpages(){
-		$.getJSON('../includes/getAllpages.php', function(data) { // Haal informatie op van getPages, hierin staat een query dat alle pagina`s van een bepaalde categorie ophaalt.
+		$.getJSON('../API/getAllpages.php', function(data) { // Haal informatie op van getPages, hierin staat een query dat alle pagina`s van een bepaalde categorie ophaalt.
 			console.log(data); // log de data ter controle in het console
 				var i, j, strHTML = ""; // i = het aantal records, j is de specifieke kolom van het record, strHTML is de string van html dat door javascript aangemaakt zal worden
 				for (i = 0; i < data.length; i += 1) {
@@ -40,7 +40,7 @@ function loadHTML(){
 		alert(n);
 		$.ajax({
 		type: 'get',
-		url: 'includes/getDetails.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		url: '../API/getDetails.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
 		data: 'id='+n,
 		success: function(data) {
 			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
@@ -58,7 +58,7 @@ function loadBedrijf(){
 		var currentUser = document.getElementById('user').value;
 		$.ajax({
 		type: 'get',
-		url: 'includes/loadBedrijf.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		url: '../API/loadBedrijf.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
 		data: 'id='+currentUser,
 		success: function(data) {
 			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
@@ -84,7 +84,7 @@ function loadLogin(){
 		var currentUser = document.getElementById('user').value;
 		$.ajax({
 		type: 'get',
-		url: 'includes/loadLogin.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		url: '../API/loadLogin.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
 		data: 'id='+currentUser,
 		success: function(data) {
 			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
@@ -103,7 +103,7 @@ function loadBranche(){
 		var currentUser = document.getElementById('user').value;
 		$.ajax({
 		type: 'get',
-		url: 'includes/loadBranche.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		url: '../API/loadBranche.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
 		data: 'id='+currentUser,
 		success: function(data) {
 			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
@@ -121,7 +121,7 @@ function loadPakket(){
 		var currentUser = document.getElementById('user').value;
 		$.ajax({
 		type: 'get',
-		url: 'includes/loadPakket.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		url: '../API/loadPakket.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
 		data: 'id='+currentUser,
 		success: function(data) {
 			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
@@ -138,7 +138,7 @@ function loadContract(){
 		var currentUser = document.getElementById('user').value;
 		$.ajax({
 		type: 'get',
-		url: 'includes/loadContract.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		url: '../API/loadContract.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
 		data: 'id='+currentUser,
 		success: function(data) {
 			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
@@ -155,7 +155,7 @@ function loadMelding(){
 		var currentUser = document.getElementById('user').value;
 		$.ajax({
 		type: 'get',
-		url: 'includes/loadMelding.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		url: '../API/loadMelding.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
 		data: 'id='+currentUser,
 		success: function(data) {
 			var i, j, strHTML = "";
@@ -173,7 +173,7 @@ function readMelding(key){
 		console.log(meldingID);
 		$.ajax({
 		type: 'get',
-		url: 'includes/load_currentMelding.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		url: '../API/load_currentMelding.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
 		data: 'id='+meldingID,
 		success: function(data) {
 			console.log(data);
@@ -192,7 +192,7 @@ function add_specialisatie(){
 		var branche = document.getElementById('branche').value;
 		$.ajax({
 		type: 'get',
-		url: 'includes/addSpecialisatie.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		url: '../API/addSpecialisatie.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
 		data: {id: currentUser, specialisatie: value, branche: branche},
 		success: function(data) {
 			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
@@ -214,6 +214,38 @@ function panelNieuwsbrief() {
 	strHTML += '</form>';
 	$(".content_berichten").html(strHTML)	
 }
+
+function panelBericht(){
+		$.ajax({
+		type: 'get',
+		url: 'jsonRequests/loadAlleUsers.php', //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
+		success: function(data) {
+			console.log(data);
+			var i, j, strHTMLusers = ""; // data wordt weer opgehaald en geplaatst in de string.
+			for (i = 0; i < data.length; i += 1) {
+			strHTMLusers += "<option value='"+data[i]['userID']+"'>"+data[i]['username']+ "</option>";
+			}
+			var strFORM = '<form id="sendmsg"><label>Onderwerp</label><input type="text" name="input_send_subject"/><label>Aan</label><select id="select_klant" name="input_send_klant"></select><label>Bericht</label><textarea style="height:100px;" name="input_send_msg"></textarea></form><a href="#" onclick="sendMSG();" class="small button secondary">Versturen</a>'
+			$(".content_berichten").html(strFORM); // string wordt in het element met ID contentPage geplaatst.
+			$("#select_klant").html(strHTMLusers); // string wordt in het element met ID contentPage geplaatst.
+			}
+		});
+};
+
+function sendMSG(){
+	var userid = document.getElementsByName('input_send_klant')[0].value;
+	var onderwerp = document.getElementsByName('input_send_subject')[0].value;
+	var bericht = document.getElementsByName('input_send_msg')[0].value;
+	$.ajax({
+		type: 'get',
+		url: 'jsonRequests/send_msg.php',
+		data: {u:userid, onderwerp:onderwerp, bericht:bericht}
+	});
+	document.getElementById("sendmsg").reset();
+	alert('Bericht is succesvol verstuurd');
+	
+}
+
 
 function panelOfferte(){
 		$.ajax({
@@ -242,7 +274,7 @@ function loadOfferte(){
 		url: 'includes/loadOffertes_bedrijf.php?u='+currentUser, //in dit bestand staat een php variable dat de ID ophaalt. Met het ID kan een query uitgevoerd worden dat de content van de page ID ophaalt.
 		success: function(data) {
 			var i, j, strHTML = ""; // data wordt weer opgehaald en geplaatst in de string.
-			strHTML += "<table><th>Offerte ID</th><th>Consumer Email</th><th>Offerte omschrijving</th>"
+			strHTML += "<table><th>unique id</th><th>Email Consument</th><th>Vraag van Consument</th>"
 			for (i = 0; i < data.length; i += 1) {
 			strHTML += "<tr><td>" + data[i]['offerte_id'] + "</td>";
 			strHTML += "<td>" + data[i]['consumermail'] + "</td>";

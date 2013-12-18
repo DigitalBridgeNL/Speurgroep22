@@ -1,10 +1,10 @@
 <?php
 		header('Content-type: application/json');
 		// Verbinding met de database
-		include('DBinteraction.php');
-		$currentuser = $_GET['id'];
+		include('../includes/DBinteraction.php');
 		openDB();
-		$result = mysql_query("SELECT m.meldingID, m.datum, m.onderwerp, m.tekst FROM melding m, melding_user mu WHERE m.meldingID = mu.meldingID AND mu.userID ='$currentuser'");
+		$category = $_GET["id"];
+		$result = mysql_query("SELECT * FROM branche WHERE branche_categoryID = $category");
 		$rows = array();
 		while($r = mysql_fetch_assoc($result)) 
 		{

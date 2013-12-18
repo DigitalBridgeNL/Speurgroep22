@@ -13,12 +13,12 @@
 		{
 			$bedrijven = array();
 			$bedrijvenSQL = mysql_query("SELECT * FROM join_bedrijf_branche WHERE branche_id = $brancheID");
-			while($bedrijf = mysql_fetch_assoc($bedrijvenSQL))
+			while($bedrijfRow = mysql_fetch_assoc($bedrijvenSQL))
 			{
-				$bedrijfID = $bedrijf['bedrijf_id'];
-				print($bedrijfID);
+				$bedrijfID = $bedrijfRow['bedrijf_id'];
 				//Retrieve the name of the bedrijf
-				$bedrijfNameSQL = mysql_query("SELECT name FROM bedrijven WHERE id = $bedrijfID");
+				$bedrijfNameSQL = mysql_query("SELECT name, id FROM bedrijven WHERE id = $bedrijfID");
+				$bedrijf = array();
 				$row = mysql_fetch_assoc($bedrijfNameSQL);
 				$bedrijf['name'] = $row['name'];
 				$bedrijf['id'] = $row['id'];

@@ -14,12 +14,14 @@ function branchesCtrl($scope, $location, $routeParams, navigate)
 	$scope.navigate = navigate;
 	$scope.branche = $routeParams.branche;
 	
-	$scope.bedrijven = $.ajax({
+	var result = $.ajax({
 		  url: "API/loadBedrijven.php",
 		  data: "branche=" + $scope.branche,
 		  dataType:"json",
-		  async: false
-		  });
+		  async: false,
+	});
+	$scope.bedrijven = JSON.parse(result['responseText']).bedrijven;
+	console.log($scope.bedrijven);
 }
 
 function bedrijfCtrl($scope, $location)

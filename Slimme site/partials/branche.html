@@ -11,11 +11,8 @@
         		</div>
         	</div>
             <div class="row">
-            	<div class="large-3 columns" ng-repeat="category in categories | filter:search">
-            		<h3>{{category['naam']}}</h3>
-            		<div class="branche" ng-repeat="branche in category['branches']">
-            			<a ng-click="navigate.branche(branche)">{{branche}}</a>
-            		</div>
+            	<div class="large-3 columns" ng-repeat="bedrijf in bedrijven | filter:search">
+					{{bedrijf.name}}
             	</div>
             </div>
         </div>

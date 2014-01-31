@@ -1,10 +1,10 @@
 <?php
 		header('Content-type: application/json');
 		// Verbinding met de database
-		include('DBinteraction.php');
-		$current_meldingID = $_GET['id'];
+		include('../includes/DBinteraction.php');
+		$currentuser = $_GET['id'];
 		openDB();
-		$result = mysql_query("SELECT onderwerp, tekst FROM melding WHERE meldingID = '$current_meldingID'");
+		$result = mysql_query("SELECT pakketid FROM user WHERE userID ='$currentuser'");
 		$rows = array();
 		while($r = mysql_fetch_assoc($result)) 
 		{

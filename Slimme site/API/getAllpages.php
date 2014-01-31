@@ -1,15 +1,15 @@
 <?php
 		header('Content-type: application/json');
 		// Verbinding met de database
-		include('DBinteraction.php');
-		$currentuser = $_GET['id'];
+		include('../includes/DBinteraction.php');
 		openDB();
-		$result = mysql_query("SELECT * FROM user WHERE userID ='$currentuser'");
+		$result = mysql_query('SELECT p.id, p.catid as catname, p.name as pagename FROM page p');
 		$rows = array();
 		while($r = mysql_fetch_assoc($result)) 
 		{
 			$rows[] = $r;
 		}
 		// Zet PHP array om naar JSON
-		echo json_encode($rows); 			
+		echo json_encode($rows);
+		closeDB();
 ?>

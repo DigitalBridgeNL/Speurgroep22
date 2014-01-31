@@ -116,48 +116,6 @@
   {
       	//mysql_close($DB);
   }
-
-  function showPages()
-  {
-		openDB();
-		$result = mysql_query('SELECT id, name FROM page WHERE catid = 1');
-		$rows = array();
-		while($r = mysql_fetch_assoc($result)) 
-		{
-			$rows[] = $r;
-		}
-		// Zet PHP array om naar JSON
-		echo json_encode($rows); 
-  }
-  
-    function showAllpages()
-  {
-		openDB();
-		$result = mysql_query('SELECT p.id, c.name as catname, p.name as pagename FROM categorie c, page p WHERE p.catid = c.id order by catname');
-		$rows = array();
-		while($r = mysql_fetch_assoc($result)) 
-		{
-			$rows[] = $r;
-		}
-		// Zet PHP array om naar JSON
-		echo json_encode($rows);
-		closeDB();
-  }
-  
-  
-  function getContactdata()
-  {
-		openDB();
-		$result = mysql_query('SELECT username, kvknr, btwnr FROM user WHERE type = "owner"');
-		$rows = array();
-		while($r = mysql_fetch_assoc($result)) 
-		{
-			$rows[] = $r;
-		}
-		// Zet PHP array om naar JSON
-		echo json_encode($rows); 
-		closeDB();
-  }
   
   function loadHTML($pageID)
   {
@@ -283,11 +241,11 @@
 			//Ask for HTML-friendly debug output
 			$mail->Debugoutput = 'html';
 			//Set the hostname of the mail server
-			$mail->Host = "smtp.nbrix.nl";
+			$mail->Host = "smtp.ziggo.nl";
 			//Set the SMTP port number - likely to be 25, 465 or 587
 			$mail->Port = 25;
 			//Whether to use SMTP authentication
-			$mail->SMTPAuth = true;
+			$mail->SMTPAuth = false;
 			//Username to use for SMTP authentication
 			$mail->Username = "no-reply@nbrix.nl";
 			//Password to use for SMTP authentication

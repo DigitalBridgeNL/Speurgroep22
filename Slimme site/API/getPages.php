@@ -1,15 +1,14 @@
 <?php
 		header('Content-type: application/json');
 		// Verbinding met de database
-		include('DBinteraction.php');
+		include('../includes/DBinteraction.php');
 		openDB();
-		$category = $_GET["id"];
-		$result = mysql_query("SELECT * FROM branche WHERE branche_categoryID = $category");
+		$result = mysql_query('SELECT id, name FROM page WHERE catid = "Help en Info"');
 		$rows = array();
 		while($r = mysql_fetch_assoc($result)) 
 		{
 			$rows[] = $r;
 		}
 		// Zet PHP array om naar JSON
-		echo json_encode($rows); 			
+		echo json_encode($rows); 	
 ?>

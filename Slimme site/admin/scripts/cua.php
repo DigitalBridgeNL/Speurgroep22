@@ -73,7 +73,7 @@ if (isset($_POST['uploadCSV'])){
 					//MAIL DIE KLANTTTTT//
 					////////////////////////////////////////////////////////////////////////////
 					//Create a new PHPMailer instance
-					$mail_content = '<html><body><h5>Geachte heer/mevrouw,'.$email.$mypassword.'</h5><p>We hebben een account aangemaakt voor de website van Speurgroep</p><p>Met vriendelijke groet,</p><br /><p>NBrIX Tilburg</p></body></html>';					
+					$mail_content = '<html><body><h5>Geachte heer/mevrouw,'.$email.$mypassword.'</h5><p>We hebben een account aangemaakt voor de website van Speurgroep</p><p>Met vriendelijke groet,</p><br /><p>Speurgroep VOF</p></body></html>';					
 										
 					
 					$mail = new PHPMailer();
@@ -83,19 +83,19 @@ if (isset($_POST['uploadCSV'])){
 					// 0 = off (for production use)
 					// 1 = client messages
 					// 2 = client and server messages
-					$mail->SMTPDebug = 0;
+					$mail->SMTPDebug = 2;
 					//Ask for HTML-friendly debug output
 					$mail->Debugoutput = 'html';
 					//Set the hostname of the mail server
-					$mail->Host = "smtp.nbrix.nl";
+					$mail->Host = "smtp.ziggo.nl";
 					//Set the SMTP port number - likely to be 25, 465 or 587
 					$mail->Port = 25;
 					//Whether to use SMTP authentication
-					$mail->SMTPAuth = true;
+					$mail->SMTPAuth = false;
 					//Username to use for SMTP authentication
-					$mail->Username = "peter.van.der.zande@nbrix.nl";
+					//$mail->Username = "peter.van.der.zande@nbrix.nl";
 					//Password to use for SMTP authentication
-					$mail->Password = "letmein4now";
+					//$mail->Password = "letmein4now";
 					//Set who the message is to be sent from
 					$mail->setFrom('no-reply@nbrix.nl', 'NBrIX');
 					//Set an alternative reply-to address

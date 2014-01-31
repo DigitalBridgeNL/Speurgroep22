@@ -1,7 +1,7 @@
 <?php
 		header('Content-type: application/json');
 		// Verbinding met de database
-		include('DBinteraction.php');
+		include('../includes/DBinteraction.php');
 		$currentuser = $_GET['id'];
 		$currentBranche = $_GET['branche'];
 		$specialisatie = $_GET['specialisatie'];

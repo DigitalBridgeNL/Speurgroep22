@@ -9,24 +9,18 @@
   <!-- Style sheets-->
   <link rel="stylesheet" href="../css/normalize.css" />
   <link href="../css/header.css" rel="stylesheet" type="text/css" />
-  <link href="../css/contact.css" rel="stylesheet" type="text/css" />
-  <link href="../css/mijnspeurgroep.css" rel="stylesheet" type="text/css" />
-  <link href="../css/login.css" rel="stylesheet" type="text/css" />
-  <link href="../css/home.css" rel="stylesheet" type="text/css" />
-  <link href="../css/helpeninfo.css" rel="stylesheet" type="text/css" />
-  <link href="../css/adverteren.css" rel="stylesheet" type="text/css" />
   <link href="../css/foundation.css" rel="stylesheet">
-  <script type="text/javascript" src="../js/forms.js"></script>
-  <script type="text/javascript" src="../js/functions.js"></script>
+  <link href="../css/KlantenPortal/custom.css" rel="stylesheet">
+
   <!-- Angular -->
   <script type="text/javascript" src="../js/angular.min.js"></script>
+  
   <!--Klanten portal-->
   <script type="text/javascript" src="../js/angular/app.js"></script>
   <script type="text/javascript" src="../js/angular/services.js"></script>
   <script type="text/javascript" src="../js/angular/controllers/klantController.js"></script>
   <!-- Included JS Files (Compressed) -->
   <script src="../js/foundation/jquery.js"></script>
-  <script src="../js/vendor/custom.modernizr.js"></script>
   <script src="../js/json.js"></script>
 </head>
 
@@ -60,6 +54,5 @@ $branche = mysql_fetch_array($currentbranche);
 </nav>
 
 <div class="container" ng-view></div>
-
-	
-<?php include('includes/footer.php');?>
+</body>
+</html>

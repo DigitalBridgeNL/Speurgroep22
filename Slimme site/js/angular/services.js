@@ -1,7 +1,7 @@
 app.service('navigate', function($location) 
 {	
-	this.branche = function(branche) 
+	this.branche = function(brancheId) 
 	{
-		$location.path('/branche/' + branche);
+		$location.path('/branche/' + brancheId);
 	};
 });

@@ -2,18 +2,56 @@
         <div class="large-12 columns">
         	<div class="row">
         		<div class="large=12 columns">
+        			{{categorie}} > {{branche}} 
         			<h2>Bedrijven in de {{branche}} branche</h2>
         		</div>
         	</div>
-        	<div class="row">
+        	<div class="row" style="border-bottom-style: solid; border-width: 1px; height: 50px; border-color: rgb(153,153,153);">
         		<div class="large-12 columns">
         			<input type="text-field" ng-model="search"> Zoeken
         		</div>
         	</div>
-            <div class="row">
-            	<div class="large-3 columns" ng-repeat="bedrijf in bedrijven | filter:search">
-					{{bedrijf.name}}
-            	</div>
-            </div>
+        	<div class="row" ng-repeat="bedrijf in bedrijven.2 | filter:search">
+	           	<div class="advertentie" ng-class-odd="'oddAdd'" ng-class-even="'evenAdd'">
+		           	<div class="large-3 columns">				
+						<img src="lib/img/speurgroep.png" alt="some_text">
+		            </div>
+		            <div class="large-6 columns">
+		            	<strong>{{bedrijf.name}}</strong></BR>
+		            	{{bedrijf.kort_bericht}}
+		            </div>
+		            <div class="large-3 columns">
+		            	{{bedrijf.locatie}}
+		            </div>
+	            </div>
+	        </div>
+	        <div class="row" ng-repeat="bedrijf in bedrijven.1 | filter:search">
+	           	<div class="advertentie" ng-class-odd="'oddAdd'" ng-class-even="'evenAdd'">
+		           	<div class="large-3 columns">				
+						<img src="lib/img/speurgroep.png" alt="some_text">
+		            </div>
+		            <div class="large-6 columns">
+		            	<strong>{{bedrijf.name}}</strong></BR>
+		            	{{bedrijf.kort_bericht}}
+		            </div>
+		            <div class="large-3 columns">
+		            	{{bedrijf.locatie}}
+		            </div>
+	            </div>
+	        </div>
+	        <div class="row" ng-repeat="bedrijf in bedrijven.0 | filter:search">
+	           	<div class="advertentie" ng-class-odd="'oddAdd'" ng-class-even="'evenAdd'">
+		           	<div class="large-3 columns">				
+						<img src="lib/img/speurgroep.png" alt="some_text">
+		            </div>
+		            <div class="large-6 columns">
+		            	<strong>{{bedrijf.name}}</strong></BR>
+		            	{{bedrijf.kort_bericht}}
+		            </div>
+		            <div class="large-3 columns">
+		            	{{bedrijf.locatie}}
+		            </div>
+	            </div>
+	        </div>
         </div>
 </div>

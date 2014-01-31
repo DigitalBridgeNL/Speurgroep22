@@ -12,9 +12,9 @@
         	</div>
             <div class="row">
             	<div class="large-3 columns" ng-repeat="category in categories">
-            		<h3>{{category['naam']}}</h3>
+            		<h3>{{category.category}}</h3>
             		<div class="branche" ng-repeat="branche in category['branches'] | filter:search">
-            			<a ng-click="navigate.branche(branche)">{{branche}}</a>
+            			<a ng-click="navigate.branche(branche.id)">{{branche.naam}}</a>
             		</div>
             	</div>
             </div>
